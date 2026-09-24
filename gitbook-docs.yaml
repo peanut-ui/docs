@@ -3,12 +3,13 @@ $schema: https://api.gitbook.com/gitbook-docs.yaml
 site:
   title: PeanutUI
 
-structure:
-  - type: space
-    key: peanutui
-    title: PeanutUI Docs
-    path: docs
-    default: true
+  structure:
+    - type: space
+      key: peanutui
+      title: PeanutUI Docs
+      path: docs
+      default: true
 
-content:
-  directory: ./
+      content:
+        directory: ./docs
+        language: en
