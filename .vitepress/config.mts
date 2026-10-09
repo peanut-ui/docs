@@ -8,7 +8,7 @@ export default defineConfig({
     publicDir: "../public"
   },
 
-  head: [['link', { rel: 'icon', href: './favicon.ico' }]],
+  head: [['link', { rel: 'icon', href: './favicon.ico?v=2' }]],
 
   title: "PeanutUI Docs",
   description: "Documentation for PeanutUI framework for Roblox",
