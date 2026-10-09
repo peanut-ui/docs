@@ -4,6 +4,8 @@ import { defineConfig } from "vitepress"
 export default defineConfig({
   srcDir: "docs",
 
+  head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
+
   title: "PeanutUI Docs",
   description: "Documentation for PeanutUI framework for Roblox",
   themeConfig: {
