@@ -14,6 +14,8 @@ export default defineConfig({
   description: "Documentation for PeanutUI framework for Roblox",
   themeConfig: {
     // https://vitepress.dev/reference/default-theme-config
+    logo: "/favicon.ico",
+
     search: {
       provider: "local"
     },
