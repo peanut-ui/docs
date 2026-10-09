@@ -4,7 +4,7 @@ layout: home
 
 hero:
   name: "PeanutUI"
-  text: "Declarative, reactive UI for Roblox"
+  text: "Reactive UI framework for Roblox"
   tagline: Peanut-sized API, production-sized UI.
   actions:
     - theme: brand
