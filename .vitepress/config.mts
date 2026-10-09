@@ -3,8 +3,12 @@ import { defineConfig } from "vitepress"
 // https://vitepress.dev/reference/site-config
 export default defineConfig({
   srcDir: "docs",
+  base: "./",
+  vite: {
+    publicDir: "../public"
+  },
 
-  head: [['link', { rel: 'icon', href: '/favicon.ico' }]],
+  head: [['link', { rel: 'icon', href: './favicon.ico' }]],
 
   title: "PeanutUI Docs",
   description: "Documentation for PeanutUI framework for Roblox",
