@@ -22,8 +22,8 @@ export default defineConfig({
       {
         text: "v0.1.0",
         items: [
-          { text: "Changelog", link: "https://github.com/peanut-ui/docs/releases" },
-          { text: "Report an issue", link: "https://github.com/peanut-ui/docs/issues" }
+          { text: "Changelog", link: "https://github.com/peanut-ui/peanut-ui/releases" },
+          { text: "Report an issue", link: "https://github.com/peanut-ui/peanut-ui/issues" }
         ]
       },
       {
