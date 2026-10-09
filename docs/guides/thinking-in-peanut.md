@@ -6,7 +6,7 @@ title: Thinking in PeanutUI
 
 PeanutUI is both declarative and imperative, and reactive on top of that. The two styles aren't in conflict — they're two ways of writing the same thing.
 
-Also there's one main thing: Widgets are created immediately, while Roblox `Instance`s' creation is **differed**.
+Also there's one main thing: Widgets are created immediately, while Roblox `Instance`s' creation is **lazy** and **deferred**.
 
 ## Definitions
 
