@@ -6,10 +6,6 @@ title: API
 
 The public surface of PeanutUI, as exported from `UI/init.luau`.
 
-```luau
-local PeanutUI = require(ReplicatedStorage.PeanutUI)
-```
-
 ## Widgets
 
 Declarative widget constructors. See the [widget](/reference/widgets/) or [space](/reference/space) references for details.

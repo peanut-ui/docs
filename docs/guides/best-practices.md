@@ -11,8 +11,6 @@ Patterns for writing PeanutUI code that stays correct and predictable as it grow
 Put each component in its own module and `return` the result of `Component.defineComponent`. The module boundary becomes the component boundary, so there's no hunting for where a component starts and ends.
 
 ```luau
-const PeanutUI = require(ReplicatedStorage.PeanutUI)
-
 const Component = PeanutUI.Component
 const Units = PeanutUI.Units
 local Widgets = PeanutUI.Widgets
