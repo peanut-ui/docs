@@ -39,7 +39,7 @@ local space = Space.createScreenSpace("Main")
 
 ## Set auto scaling (optional)
 
-Will auto scale whole UI using reference resolution. So UI always fits on every screen. See reference [here](/reference/scaling).
+Auto scale will scale whole UI using reference resolution. So UI always fits on every screen. See reference [here](/reference/scaling).
 
 ```luau
 Scaling.simpleScale(
