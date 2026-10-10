@@ -27,6 +27,7 @@ Declarative widget constructors. See the [widget](/reference/widgets/) or [space
 | `Component.If(cond, fn)` | Reactive branching. See [Conditionals & Loops](/guides/reactive/control-flow). |
 | `Component.For(items, fn)` | Static loop over items. |
 | `Component.ReactiveFor(items, fn)` | Reactive loop over items. |
+| `Component.Lazy(fn)` | Defers widget creation until the `ObjectCreateScheduled` stage. See [Lazy](/guides/reactive/control-flow#lazy). |
 | `Component.makeStory(fn)` | Defines a story for in-engine preview. |
 
 ## Reactivity

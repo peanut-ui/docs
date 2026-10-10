@@ -86,6 +86,20 @@ The third argument is a **key function** — it maps each item to a stable key s
 Use a **shallow** reactive table for `ReactiveFor` so nested tables don't cause unnecessary recalculations.
 :::
 
+## Lazy {#lazy}
+
+`Lazy` defers widget creation until the Roblox tree is being built — when widgets become visible to the user. The `createFn` is not called when the `Box` is built; it runs later, and the resulting widget is added and created then.
+
+```luau
+Lazy(function()
+    return Widgets.TextLabel { properties = { text = "Created later" } }
+end)
+```
+
+Use it to keep expensive widget construction off the initial build path, or to create children only once the surrounding tree is being built. It returns a `Box` widget, so it slots into a `children` list like the other control-flow helpers.
+
+The most common case is an **invisible widget tree**: when a subtree starts hidden, you don't want to build it before it's actually shown. Wrap the subtree in `Lazy` so its widgets aren't created until the tree is being built, rather than eagerly on the initial build.
+
 ## Using them in children {#usage}
 
 These return a `Box` widget, so they slot straight into a `children` list:
