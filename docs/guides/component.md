@@ -103,7 +103,7 @@ Mutating `props.test` updates the component.
 
 ## Stories
 
-`Component.makeStory` defines a story for FlipBook/UILabs
+`Component.makeStory` defines a story for FlipBook/UILabs:
 
 ```luau
 local story = Component.makeStory(function()

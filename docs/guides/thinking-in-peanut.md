@@ -12,12 +12,12 @@ Also there's one main thing: Widgets are created immediately, while Roblox `Inst
 
 A few terms come up constantly. Here's what they mean in PeanutUI:
 
-- **Widget** — a live UI object. It owns a Roblox `GuiObject` (or `LayerCollector` for a Space) and exposes properties, children, events, modifiers, and animations as methods.
-- **Ref** — a reactive value. Reading `.value` inside a computed or a prop subscribes to it; writing `.value` schedules dependents to update. ([Values](/guides/reactive/values), [Computed](/guides/reactive/computed))
-- **Component** — a function wrapped by `Component.defineComponent` that returns a root widget and owns a lifecycle bucket for its refs.
-- **Space** — the renderer root. A widget that owns a `LayerCollector` (`ScreenGui`, `BillboardGui`, or `SurfaceGui`) and puts a tree on screen.
-- **Scheduler** — the staged pipeline that applies deferred reactive updates to Roblox instances.
-- **Bucket** — a scope and context. Used for ownership.
+- **Widget** — a live UI object. It owns a Roblox GUI object and exposes properties, children, events, modifiers, and animations.
+- **Ref** — a reactive value. Read it and you subscribe to it; change it and everything reading it updates. ([Values](/guides/reactive/values), [Computed](/guides/reactive/computed))
+- **Component** — a reusable piece of UI, made with `Component.defineComponent`.
+- **Space** — the root that puts your UI on screen.
+- **Scheduler** — applies reactive updates to Roblox instances.
+- **Bucket** — a scope that owns things and cleans them up.
 - **Hooks** — signals but that are mostly used internally.
 
 ## Declarative and imperative are the same thing {#declarative-imperative}
@@ -75,20 +75,15 @@ You never write "update the label" — you change `count`, and the label follows
 
 ## Deferred, not immediate {#deferred}
 
-Reactivity is **deferred**. Mutating a ref does not immediately touch Roblox instances. Instead, changes flow through the [Scheduler](/reference/scheduler) stages:
+Reactivity is **deferred**. Changing a ref does not immediately touch Roblox instances — the change is applied a moment later, on the next scheduler tick. This batches a frame's worth of changes together instead of writing to instances one by one.
 
-```
-defer → watchers → create → signals → redraw → settled → idle
-```
-
-This batches work so a single frame's worth of changes is applied together, rather than one instance write per mutation. It also means you can't assume a property is updated *immediately* after you set a ref — it updates on the next scheduler tick.
+So don't assume a property is updated the instant you set a ref. If you need to run code after a change has been applied, use `Scheduler.settled` or `PeanutUI.settled` shortcut.
 
 ## Owned, not leaked {#all-is-owned}
 
 Refs and widgets created inside a [Component](/guides/component) belong to that component's lifecycle. When the component is destroyed, its refs are cleaned up automatically. This is why you should **not** pass refs created inside a component to places outside it — they'll be destroyed with the component.
 
-The only exception is if the Ref was passed and set as value of another Ref.
-Like `ref.value = anotherRef`, when `anotherRef` is destroyed, the original Ref will just stop watching for changes.
+The only exception is if the ref was passed and set as the value of another ref. Like `ref.value = anotherRef`, when `anotherRef` is destroyed, the original ref will just stop watching for changes.
 
 ## The mental model {#mental-model}
 
@@ -101,4 +96,4 @@ If you're coming from raw Roblox, here's how the pieces line up:
 | `frame.ChildAdded:Connect(...)` | `frame.listen("ChildAdded", ...)` or `events = { ChildAdded = ... }` |
 | `frame:Destroy()` | `frame.destroy()` |
 
-The difference is that a widget is a live object you can keep acting on, and its properties can be bound to [Refs](/guides/reactive/values) so they update themselves. Once you internalize "describe the tree, mutate refs, let the scheduler apply it," the rest of the API follows.
+The difference is that a widget is a live object you can keep acting on, and its properties can be bound to [Refs](/guides/reactive/values) so they update themselves. Once you internalize "describe the tree, change refs, let the UI follow," the rest of the API follows.

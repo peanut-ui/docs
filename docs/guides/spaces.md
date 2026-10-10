@@ -72,7 +72,7 @@ local screen = Space.getScreenSpace("Main")
 
 ## Scaling
 
-A Space owns the scale function that converts pixel values into the Space's scale. Widgets read it through `getSpace()`, so a single Space can scale its whole tree:
+A Space owns the scale function that converts pixel values into the Space's scale, so a single Space can scale its whole tree:
 
 ```luau
 screen.changeScaleFn(function(px, getOriginal)
@@ -80,11 +80,9 @@ screen.changeScaleFn(function(px, getOriginal)
 end)
 ```
 
-Changing the scale fires `ScaleChanged`, and widgets redraw their scaled properties in response.
-
 ## Properties
 
-Each Space type has its own properties — see the [Space reference](/reference/space) for the full list. The shared ones are `name`, `visible`, `zIndexBehavior`, and the read-only `absoluteSize` / `absolutePosition` / `absoluteRotation`.
+Each Space type has its own properties — see the [Space reference](/reference/space) for the full list.
 
 ## Events
 

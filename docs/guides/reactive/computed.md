@@ -50,8 +50,6 @@ local bad = Ref.computed(function()
 end)
 ```
 
-Reactive proxies handle their own ref creation internally, so reading a proxy field inside a computed is fine.
-
 ## Using computed in widgets {#usage}
 
 Computed values are the usual way to make a property reactive:

@@ -139,4 +139,4 @@ print(State.preferredInput.value)   -- "gamepad" | "desktop" | "touch"
 
 ## Deferred updates {#deferred-updates}
 
-Ref changes are **deferred** — they don't hit Roblox instances immediately. They flow through the [Scheduler](/reference/scheduler) stages (`defer → watchers → create → signals → redraw → settled → idle`). Don't assume a property is updated the instant you set a ref.
+Ref changes are **deferred** — they don't hit Roblox instances immediately. Don't assume a property is updated the instant you set a ref.

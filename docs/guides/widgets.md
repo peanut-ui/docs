@@ -100,7 +100,7 @@ Widgets.TextButton {
 
 ## Modifiers
 
-Modifiers attach Roblox `UIComponent`s — corners, padding, strokes, layouts:
+Modifiers add styling and layout — corners, padding, strokes, lists:
 
 ```luau
 Widgets.Frame {

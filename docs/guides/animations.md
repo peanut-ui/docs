@@ -62,17 +62,6 @@ The three arguments are:
 2. **`properties`** — the Roblox property names the animation touches.
 3. **`createState(object, scale?)`** — optional. Returns the initial state.
 
-### Controlling the period {#period-control}
-
-`math.sin` takes radians, so to oscillate with a period of `T` seconds:
-
-```luau
-local PERIOD = 2
-local offset = amplitude * math.sin(state.t * (2 * math.pi / PERIOD))
-```
-
-`state.t * math.pi` alone gives a 2-second period, but naming the period makes the intent clear.
-
 ### The `scale` callback {#scale-callback}
 
 `createState` receives an internal `scale` function that converts pixel values to the current [Space](/reference/space)'s scale. Most custom animations can ignore it — it's only needed when animating pixel values that should respect the Space.
