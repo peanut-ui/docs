@@ -7,7 +7,7 @@ title: Component
 A component is a function that returns a widget, with lifecycle hooks attached. Components are how you package reusable UI.
 
 ```luau
-local Component = PeanutUI.Component
+const Component = PeanutUI.Component
 ```
 
 ## Defining a component {#define}
@@ -15,8 +15,8 @@ local Component = PeanutUI.Component
 `Component.defineComponent` takes a function that receives props and returns a widget:
 
 ```luau
-local Counter = Component.defineComponent(function(props: { start: number })
-    local count = Ref.new(props.start)
+const Counter = Component.defineComponent(function(props: { start: number })
+    const count = Ref.new(props.start)
 
     return Widgets.TextLabel {
         properties = {
@@ -31,7 +31,7 @@ end)
 Call it like a function:
 
 ```luau
-local counter = Counter({ start = 0 })
+const counter = Counter({ start = 0 })
 ```
 
 ## Lifecycle hooks
@@ -46,7 +46,7 @@ Hooks must be called **while the component is being defined** — inside the `de
 | `Component.onDestroyed(fn)` | After destruction. Widget, refs, and object are gone. |
 
 ```luau
-local Test = Component.defineComponent(function(props: { test: string })
+const Test = Component.defineComponent(function(props: { test: string })
     Component.onSetup(function(widget)
         print("Widget setup!")
     end)
@@ -84,10 +84,10 @@ Passing refs to **children** is okay if they're **never re-parented**.
 You can pass a reactive table as props and read individual fields with `Ref.toRef`:
 
 ```luau
-local props = Ref.reactive({ test = "Hello" })
+const props = Ref.reactive({ test = "Hello" })
 
-local Test = Component.defineComponent(function(props)
-    local test = Ref.toRef(props, "test")
+const Test = Component.defineComponent(function(props)
+    const test = Ref.toRef(props, "test")
 
     return Widgets.TextLabel {
         properties = {
@@ -106,7 +106,7 @@ Mutating `props.test` updates the component.
 `Component.makeStory` defines a story for FlipBook/UILabs:
 
 ```luau
-local story = Component.makeStory(function()
+const story = Component.makeStory(function()
     return Counter({ start = 0 })
 end)
 ```

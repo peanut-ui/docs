@@ -7,7 +7,7 @@ title: Units
 Reactive replacements for `UDim2` and `UDim`. They support per-component scaling and ref-driven updates.
 
 ```luau
-local Units = PeanutUI.Units
+const Units = PeanutUI.Units
 ```
 
 ## Constructors
@@ -53,7 +53,7 @@ Units.Unit(nil, 0.5)    -- 50% scale
 `Size` and `Position` fields are reactive — mutating them updates the widget:
 
 ```luau
-local size = Ref.reactive(Units.Size(150, 150))
+const size = Ref.reactive(Units.Size(150, 150))
 
 size.width += 25
 size.height += 25

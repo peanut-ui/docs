@@ -7,7 +7,7 @@ title: Space
 A `Space` is the renderer root — a widget wrapper around a Roblox `LayerCollector` (`ScreenGui`, `BillboardGui`, or `SurfaceGui`). Every widget tree is mounted into a Space, and the Space is what actually puts the tree on screen.
 
 ```luau
-local Space = PeanutUI.Space
+const Space = PeanutUI.Space
 ```
 
 ## Roblox reference:
@@ -24,7 +24,7 @@ Each Space type has a `create*` constructor and a matching `get*` lookup. Spaces
 Creates a `ScreenGui`-backed Space, parented to the local player's `PlayerGui`.
 
 ```luau
-local screen = Space.createScreenSpace("Main", {
+const screen = Space.createScreenSpace("Main", {
     displayOrder = 1,
     ignoreGuiInset = true,
 })
@@ -35,7 +35,7 @@ local screen = Space.createScreenSpace("Main", {
 Creates a `BillboardGui`-backed Space.
 
 ```luau
-local billboard = Space.createBillboardSpace("HealthBar", {
+const billboard = Space.createBillboardSpace("HealthBar", {
     adornee = somePart,
     size = Units.Size(200, 50),
 })
@@ -46,7 +46,7 @@ local billboard = Space.createBillboardSpace("HealthBar", {
 Creates a `SurfaceGui`-backed Space.
 
 ```luau
-local surface = Space.createSurfaceSpace("Sign", {
+const surface = Space.createSurfaceSpace("Sign", {
     adornee = somePart,
     face = Enum.NormalId.Front,
 })

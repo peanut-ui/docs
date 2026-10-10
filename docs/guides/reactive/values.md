@@ -96,7 +96,7 @@ print(health.value)
 Use a **shallow** proxy when you don't want nested tables to trigger recalculations:
 
 ```luau
-local state = reactive({ items = {} }, true)
+const state = reactive({ items = {} }, true)
 ```
 
 ## Computed {#computed}
@@ -104,10 +104,10 @@ local state = reactive({ items = {} }, true)
 `Ref.computed` derives a value from other refs:
 
 ```luau
-local a = ref(2)
-local b = ref(3)
+const a = ref(2)
+const b = ref(3)
 
-local sum = computed(function()
+const sum = computed(function()
     return a.value + b.value
 end)
 
@@ -123,7 +123,7 @@ Computed values are **lazy** — they only recompute when something reads them a
 `Ref.isEqual` creates a computed boolean comparing a ref to a value or another ref:
 
 ```luau
-local isTouch = isEqual(State.preferredInput, "touch")
+const isTouch = isEqual(State.preferredInput, "touch")
 print(isTouch.value)
 ```
 
@@ -132,7 +132,7 @@ print(isTouch.value)
 `PeanutUI.State` holds global reactive state:
 
 ```luau
-local State = PeanutUI.State
+const State = PeanutUI.State
 
 print(State.preferredInput.value)   -- "gamepad" | "desktop" | "touch"
 ```

@@ -17,9 +17,9 @@ Spaces are registered by name. Creating two with the same name errors.
 For regular 2D UI, parented to the local player's `PlayerGui`:
 
 ```luau
-local Space = PeanutUI.Space
+const Space = PeanutUI.Space
 
-local screen = Space.createScreenSpace("Main", {
+const screen = Space.createScreenSpace("Main", {
     displayOrder = 1,
     ignoreGuiInset = true,
 })
@@ -30,7 +30,7 @@ local screen = Space.createScreenSpace("Main", {
 For UI that floats in 3D space:
 
 ```luau
-local billboard = Space.createBillboardSpace("HealthBar", {
+const billboard = Space.createBillboardSpace("HealthBar", {
     adornee = somePart,
     size = Units.Size(200, 50),
 })
@@ -41,7 +41,7 @@ local billboard = Space.createBillboardSpace("HealthBar", {
 For UI rendered on a part's face:
 
 ```luau
-local surface = Space.createSurfaceSpace("Sign", {
+const surface = Space.createSurfaceSpace("Sign", {
     adornee = somePart,
     face = Enum.NormalId.Front,
 })
@@ -67,7 +67,7 @@ screen.clearChildren()
 If you need a Space you created earlier, look it up by name:
 
 ```luau
-local screen = Space.getScreenSpace("Main")
+const screen = Space.getScreenSpace("Main")
 ```
 
 ## Scaling

@@ -7,7 +7,7 @@ title: Ease Curves
 Ease curves are functions of the form `(t: number) -> number` that map a normalized progress value `t` (from `0` to `1`) to an eased output. They are used by [Transitions](/guides/transitions) and [Animations](/guides/animations) to shape how a value moves over time.
 
 ```luau
-local Curves = PeanutUI.Curves
+const Curves = PeanutUI.Curves
 ```
 
 Every curve returns exactly `0` at `t = 0` and exactly `1` at `t = 1`, so animations always start and end on the correct value.
@@ -146,7 +146,7 @@ Bounces against the target like a falling object.
 `Curves.cubicBezier(x1, y1, x2, y2)` builds a custom cubic bezier curve from two control points:
 
 ```luau
-local curve = Curves.cubicBezier(0.25, 0.1, 0.25, 1)
+const curve = Curves.cubicBezier(0.25, 0.1, 0.25, 1)
 Transitions.Ease(0.4, curve)
 ```
 

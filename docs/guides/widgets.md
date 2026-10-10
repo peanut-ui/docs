@@ -7,7 +7,7 @@ title: Widgets
 Widgets are the declarative constructors you build your UI out of. Each one maps to a Roblox `GuiObject`.
 
 ```luau
-local Widgets = PeanutUI.Widgets
+const Widgets = PeanutUI.Widgets
 ```
 
 ## Calling convention
@@ -69,8 +69,8 @@ Widgets.TextLabel {
 ```
 
 ```luau
-local ref = PeanutUI.ref
-local count = ref(0)
+const ref = PeanutUI.ref
+const count = ref(0)
 
 Widgets.TextLabel {
     properties = {

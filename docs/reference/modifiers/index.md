@@ -101,7 +101,7 @@ modifiers = {
 | `setScaleObjectFn` | `(fn: ((value: T, getOriginal: boolean?) -> T)?) -> ()` | Replaces the scale function. |
 
 ```luau
-local corner = widget.getModifier("cornerRadius")
+const corner = widget.getModifier("cornerRadius")
 corner.setProperty("all", Units.Unit(16))
 corner.observe("all", function(value)
     print("radius is now", value)

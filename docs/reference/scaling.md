@@ -7,7 +7,7 @@ title: Scaling
 `Scaling` provides responsive pixel scaling for a [Space](/reference/space). It computes a scale factor from the Space's current size and a reference resolution, then installs it as the Space's scale function so every widget in the tree scales together.
 
 ```luau
-local Scaling = PeanutUI.Scaling
+const Scaling = PeanutUI.Scaling
 ```
 
 ## Simple scale

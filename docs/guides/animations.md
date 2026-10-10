@@ -7,7 +7,7 @@ title: Animations
 Animations run continuously — they tick every frame and mutate a property over time. They're different from [transitions](/guides/transitions), which run once when a property changes.
 
 ```luau
-local Animations = PeanutUI.Animations
+const Animations = PeanutUI.Animations
 ```
 
 ## Built-in animations {#built-in}
@@ -42,11 +42,11 @@ The `animations` table's key is just a key you choose, unlike transitions it doe
 `Animations.makeAnimation` builds a custom animation from a `step` function:
 
 ```luau
-local OffsetGradient = Animations.makeAnimation(
+const OffsetGradient = Animations.makeAnimation(
     function(obj: UIGradient, dt: number, state: { t: number })
         state.t += dt
-        local PERIOD = 2
-        local offset = 0.75 * math.sin(state.t * (2 * math.pi / PERIOD))
+        const PERIOD = 2
+        const offset = 0.75 * math.sin(state.t * (2 * math.pi / PERIOD))
         obj.Offset = Vector2.new(offset, 0)
     end,
     {"Offset"},
@@ -71,7 +71,7 @@ The three arguments are:
 Animations attached to a widget can be controlled imperatively:
 
 ```luau
-local control = widget.getAnimationControl("spin")
+const control = widget.getAnimationControl("spin")
 control.stop()
 control.animate()
 control.isRunning()

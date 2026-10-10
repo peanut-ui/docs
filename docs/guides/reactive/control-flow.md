@@ -7,10 +7,10 @@ title: Conditionals & Loops
 `If`, `For`, and `ReactiveFor` build children reactively. They live in the `ControlFlow` module and are re-exported on `Component`.
 
 ```luau
-local Component = PeanutUI.Component
-local If = Component.If
-local For = Component.For
-local ReactiveFor = Component.ReactiveFor
+const Component = PeanutUI.Component
+const If = Component.If
+const For = Component.For
+const ReactiveFor = Component.ReactiveFor
 ```
 
 ## If
@@ -65,7 +65,7 @@ end)
 `ReactiveFor` loops over a **reactive** table and updates as it changes:
 
 ```luau
-local items = Ref.reactive({ "a", "b" }, true)
+const items = Ref.reactive({ "a", "b" }, true)
 
 ReactiveFor(items, function(value)
     return Widgets.TextLabel {

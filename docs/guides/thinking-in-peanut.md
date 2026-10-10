@@ -43,11 +43,11 @@ Widgets.Frame {
 
 ```luau
 -- Imperative
-local frame = Widgets.Frame()
+const frame = Widgets.Frame()
 frame.setProperty("size", Units.Size(200, 200))
 frame.setProperty("backgroundColor", Color3.fromRGB(30, 30, 30))
 
-local label = Widgets.TextLabe()
+const label = Widgets.TextLabel()
 label.setProperty("text", "Hello")
 
 frame.addChild(label)
@@ -60,7 +60,7 @@ The declarative form is just sugar over the imperative one. Use whichever reads 
 Values that change are [Refs](/guides/reactive/values). When a ref changes, anything reading it updates:
 
 ```luau
-local count = Ref.new(0)
+const count = Ref.new(0)
 
 Widgets.TextLabel {
     properties = {

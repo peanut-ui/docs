@@ -7,7 +7,7 @@ title: Transitions
 Transitions animate a property **when it changes**. They run once per change, unlike [animations](/guides/animations), which run continuously.
 
 ```luau
-local Transitions = PeanutUI.Transitions
+const Transitions = PeanutUI.Transitions
 ```
 
 ## Attaching a transition {#attaching}

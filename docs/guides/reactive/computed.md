@@ -7,7 +7,7 @@ title: Computed
 A computed is a ref whose value is derived from other refs. It tracks its dependencies automatically and recomputes only when one of them changes.
 
 ```luau
-local sum = Ref.computed(function()
+const sum = Ref.computed(function()
     return a.value + b.value
 end)
 ```
@@ -17,10 +17,10 @@ end)
 When you read a computed's `.value`, it runs the function and records which refs were read. When any of those refs change, the computed is marked dirty. The next time something reads it, it recomputes.
 
 ```luau
-local a = Ref.new(2)
-local b = Ref.new(3)
+const a = Ref.new(2)
+const b = Ref.new(3)
 
-local sum = Ref.computed(function()
+const sum = Ref.computed(function()
     return a.value + b.value
 end)
 
@@ -44,8 +44,10 @@ Computed functions must be **pure**. Creating refs, watching, or mutating state 
 
 ```luau
 -- This errors
-local bad = Ref.computed(function()
-    local other = Ref.new(0)   -- side effect!
+const refOutside = Ref.new(0)
+const bad = Ref.computed(function()
+    const other = Ref.new(0)   -- side effect!
+    refOutside.value += 1  -- side effect too!
     return other.value
 end)
 ```
@@ -69,13 +71,13 @@ Widgets.TextLabel {
 For simple comparisons, `Ref.isEqual` is a shortcut:
 
 ```luau
-local isTouch = Ref.isEqual(State.preferredInput, "touch")
+const isTouch = Ref.isEqual(State.preferredInput, "touch")
 ```
 
 It's equivalent to:
 
 ```luau
-local isTouch = Ref.computed(function()
+const isTouch = Ref.computed(function()
     return State.preferredInput.value == "touch"
 end)
 ```

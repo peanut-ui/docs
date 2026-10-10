@@ -13,10 +13,10 @@ Put each component in its own module and `return` the result of `Component.defin
 ```luau
 const Component = PeanutUI.Component
 const Units = PeanutUI.Units
-local Widgets = PeanutUI.Widgets
+const Widgets = PeanutUI.Widgets
 
-local ref = PeanutUI.ref
-local computed = PeanutUI.computed
+const ref = PeanutUI.ref
+const computed = PeanutUI.computed
 
 return Component.defineComponent(function(props)
     const count = ref(0)
@@ -41,12 +41,12 @@ end)
 Animations, color palettes, and shared types don't depend on `props` or component state — define them once at module scope instead of recreating them per instance.
 
 ```luau
-local backgroundColors = {
+const backgroundColors = {
     Color3.fromHex("cafeed"),
     Color3.fromHex("#fecaca"),
 }
 
-local Spin = Animations.makeAnimation(function(obj, dt)
+const Spin = Animations.makeAnimation(function(obj, dt)
     obj.Rotation += 120 * dt
 end, { "Rotation" })
 
@@ -61,13 +61,13 @@ If a value is derived from another, use `Ref.computed`. A watcher that writes in
 
 ```luau
 -- Avoid: a watcher mirroring a value into another ref
-local doubled = Ref.new(0)
+const doubled = Ref.new(0)
 count.watch(function(v)
     doubled.value = v * 2
 end)
 
 -- Prefer: derive it
-local doubled = Ref.computed(function()
+const doubled = Ref.computed(function()
     return count.value * 2
 end)
 ```
@@ -79,14 +79,14 @@ Refs created inside a component are destroyed with it. Passing one outside the c
 ```luau
 -- Avoid: the ref escapes the component
 local leaked
-local Test = Component.defineComponent(function()
+const Test = Component.defineComponent(function()
     leaked = Ref.new(0)
     return Widgets.Frame {}
 end)
 
 -- Prefer: create shared refs outside, or keep them inside
-local shared = Ref.new(0)
-local Test = Component.defineComponent(function()
+const shared = Ref.new(0)
+const Test = Component.defineComponent(function()
     return Widgets.TextLabel {
         properties = {
             text = Ref.computed(function()
@@ -102,7 +102,7 @@ end)
 Deep reactive tables recalculate on nested changes. When you drive a list with `ReactiveFor`, wrap the table as shallow so only top-level changes trigger work.
 
 ```luau
-local items = Ref.reactive({ "a", "b" }, true)
+const items = Ref.reactive({ "a", "b" }, true)
 ```
 
 ## Don't assume updates are immediate {#updates-are-deferred}
@@ -112,7 +112,7 @@ Mutations flow through the [Scheduler](/reference/scheduler) stages — they don
 Public API got [shortcuts](/reference/api#scheduler) for that
 
 ```luau
-local settled = PeanutUI.settled
+const settled = PeanutUI.settled
 count.value += 1
 
 settled(function()

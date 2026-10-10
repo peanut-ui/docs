@@ -14,17 +14,9 @@ Coming Soon...
 
 PeanutUI is a library, so where it lives depends on how you installed it:
 
-- **Manual install** — `ReplicatedStorage.PeanutUI`
-- **Wally install** — `ReplicatedStorage.Packages.PeanutUI`
-
 ```luau
-local ReplicatedStorage = game:GetService("ReplicatedStorage")
-
--- Manual install
-local PeanutUI = require(ReplicatedStorage.PeanutUI)
-
--- Wally install
-local PeanutUI = require(ReplicatedStorage.Packages.PeanutUI)
+const ReplicatedStorage = game:GetService("ReplicatedStorage")
+const PeanutUI = require(ReplicatedStorage.PeanutUI)  -- Or anywhere you put it
 ```
 
 ## Create a Space
@@ -32,9 +24,9 @@ local PeanutUI = require(ReplicatedStorage.Packages.PeanutUI)
 A [Space](/reference/space) is the renderer root — it is a widget that owns a Roblox `LayerCollector`. `Space.createScreenSpace` creates a `ScreenGui`-backed Space (a `ScreenSpace`), which is what puts your tree on screen:
 
 ```luau
-local Space = PeanutUI.Space
+const Space = PeanutUI.Space
 
-local space = Space.createScreenSpace("Main")
+const space = Space.createScreenSpace("Main")
 ```
 
 ## Set auto scaling (optional)
@@ -54,11 +46,11 @@ Scaling.simpleScale(
 [Components](/guides/component) are the unit of composition. `Component.defineComponent` wraps a function that returns a root widget, and gives you a lifecycle [bucket](/guides/thinking-in-peanut#definitions) for refs and hooks:
 
 ```luau
-local Component = PeanutUI.Component
-local Widgets = PeanutUI.Widgets
-local Units = PeanutUI.Units
+const Component = PeanutUI.Component
+const Widgets = PeanutUI.Widgets
+const Units = PeanutUI.Units
 
-local Hello = Component.defineComponent(function(props)
+const Hello = Component.defineComponent(function(props)
     return Widgets.Frame {
         properties = {
             size = Units.Size(200, 200),
@@ -82,7 +74,7 @@ end)
 Create the component and parent its root widget to the Space with `setParent`:
 
 ```luau
-local root = Hello({ text = "Hello, PeanutUI!" })
+const root = Hello({ text = "Hello, PeanutUI!" })
 
 root.setParent(space)
 ```

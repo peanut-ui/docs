@@ -7,7 +7,7 @@ title: Scheduler
 The `Scheduler` is the staged pipeline that applies deferred reactive updates. When a [Ref](/guides/reactive/values) changes, the work it triggers does not run immediately — it is queued into a stage and flushed on the next tick.
 
 ```luau
-local Scheduler = PeanutUI.Scheduler
+const Scheduler = PeanutUI.Scheduler
 ```
 
 ## Stages
