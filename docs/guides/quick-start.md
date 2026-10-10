@@ -89,6 +89,26 @@ root.setParent(space)
 
 That's it — you should see a rounded dark frame with a label inside.
 
+## When to use PeanutUI {#when-to-use}
+
+PeanutUI is made for **big UIs**. It takes a bit more to learn, and in return it stays clean and fast as your UI grows.
+
+**Use PeanutUI when:**
+
+- Your UI is **large** and has **lots of parts**.
+- Parts **come and go** while the game runs.
+- You want your UI to **look right on every screen**.
+- **Several people** work on the UI together.
+- You want **animations** built in.
+
+**Don't use PeanutUI when:**
+
+- Your UI is **small** or you're just **prototyping**.
+- You want the **fastest way** to get something on screen.
+- You're happy using **plain Roblox UI** on its own.
+
+If your UI is small, a simpler library will feel nicer. PeanutUI is worth it once your UI gets big.
+
 ## Next steps
 
 - [Thinking in PeanutUI](/guides/thinking-in-peanut) — the mental model.
