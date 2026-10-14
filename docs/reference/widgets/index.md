@@ -37,6 +37,23 @@ Widgets.Frame(
 Passing both `props.children` and a second `children` argument errors. Use one or the other.
 :::
 
+## Simplified API
+
+Widgets also accept a flat table where properties, events, and modifiers are classified by key name, so you can skip the `properties` / `events` / `modifiers` nesting:
+
+```luau
+Widgets.TextButton {
+    text = "Click me",
+    size = Units.Size(200, 60),
+    cornerRadius = { all = Units.Unit(12) },
+    Activated = function()
+        print("clicked")
+    end,
+}
+```
+
+See [Simplified API](/guides/widgets#simplified-api) in the widgets guide for the full rules.
+
 ## Available widgets
 
 | Widget | Roblox object |

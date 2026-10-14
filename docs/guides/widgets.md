@@ -43,6 +43,45 @@ Widgets.Frame {
 Passing both `props.children` and a second `children` argument errors.
 :::
 
+## Simplified API
+
+You don't have to nest everything under `properties`, `events`, and `modifiers`. A widget accepts a **flat** table where each key is classified automatically:
+
+- Keys matching a widget property (`size`, `text`, `backgroundColor`, ...) become properties.
+- Keys matching a known event (`Activated`, `InputBegan`, ...) become event handlers.
+- Keys matching a modifier (`cornerRadius`, `padding`, `list`, ...) become modifiers.
+
+```luau
+Widgets.TextButton {
+    text = "Click me",
+    size = Units.Size(200, 60),
+    cornerRadius = { all = Units.Unit(12) },
+    Activated = function()
+        print("clicked")
+    end,
+}
+```
+
+This is equivalent to the nested form:
+
+```luau
+Widgets.TextButton {
+    properties = { text = "Click me", size = Units.Size(200, 60) },
+    modifiers = { cornerRadius = { all = Units.Unit(12) } },
+    events = {
+        Activated = function()
+            print("clicked")
+        end,
+    },
+}
+```
+
+Both forms can be mixed — flat keys are merged with any explicit `properties`, `events`, or `modifiers` tables (explicit tables win on conflict).
+
+::: tip
+Only properties, events, and modifiers can be written flat. Everything else — `children`, `transitions`, `animations`, `onSetup`, `widgetName` — must stay nested.
+:::
+
 ## Props
 
 A props table can contain:
@@ -54,6 +93,10 @@ A props table can contain:
 | `events` | Event handlers. |
 | `transitions` | Animations that run when a property changes. |
 | `animations` | Continuous animations. |
+| `children` | Child widgets. Equivalent to the second argument. |
+| `onSetup` | `(widget) -> ()` — runs after the widget is set up. |
+| `defaultSetupOverride` | `(widget, defaultFn) -> ()` — replaces the default setup; call `defaultFn` to run it. (advanced) |
+| `widgetName` | `string` — overrides the widget's name used in logs and errors. |
 
 ## Properties
 
