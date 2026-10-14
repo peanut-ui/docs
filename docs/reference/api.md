@@ -69,6 +69,13 @@ Declarative widget constructors. See the [widget](/reference/widgets/) or [space
 | `isRef(obj)` | Shortcut for `Ref.isRef`. |
 | `isEqual(a, b)` | Shortcut for `Ref.isEqual`. |
 | `Units` | Reactive `Size` / `Position` / `Unit` constructors. See [Units](/reference/units). |
+| `Size(...)` | Shortcut for `Units.Size`. |
+| `Position(...)` | Shortcut for `Units.Position`. |
+| `Unit(...)` | Shortcut for `Units.Unit`. |
+| `PositionFromUDim2(udim2)` | Shortcut for `Units.PositionFromUDim2`. |
+| `UnitFromUDim(udim)` | Shortcut for `Units.UnitFromUDim`. |
+| `ToUDim2(value)` | Shortcut for `Units.ToUDim2`. |
+| `ToUDim(value)` | Shortcut for `Units.ToUDim`. |
 | `Scaling` | Responsive pixel scaling for a Space. See [Scaling](/reference/scaling). |
 | `State` | Global reactive state (`State.preferredInput`, ...). |
 
