@@ -17,6 +17,7 @@ const getRef = PeanutUI.getRef
 const toRef = PeanutUI.toRef
 const reactive = PeanutUI.reactive
 const isEqual = PeanutUI.isEqual
+const unwrap = PeanutUI.unwrap
 ```
 
 ## Creating a ref {#creating-ref}
@@ -125,6 +126,27 @@ Computed values are **lazy** — they only recompute when something reads them a
 ```luau
 const isTouch = isEqual(State.preferredInput, "touch")
 print(isTouch.value)
+```
+
+## Unwrapping values {#unwrap}
+
+`Ref.unwrap` accepts either a ref or a plain value and returns the plain value. If it's given a ref, it reads `.value` (tracking it reactively); otherwise it returns the value unchanged:
+
+```luau
+const a = ref(2)
+
+print(unwrap(a))     -- 2
+print(unwrap(5))     -- 5
+```
+
+This is useful when a value may or may not be a ref — for example a prop typed as `ValueOrRef<T>`. Reading it inside a computed tracks the ref only when one was passed:
+
+```luau
+const someValue: ValueOrRef<number> = a
+
+const doubled = computed(function()
+    return unwrap(someValue) * 2
+end)
 ```
 
 ## Global state {#state}

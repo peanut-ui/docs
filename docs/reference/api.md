@@ -68,6 +68,7 @@ Declarative widget constructors. See the [widget](/reference/widgets/) or [space
 | `toRef(proxy, key)` | Shortcut for `Ref.toRef`. |
 | `isRef(obj)` | Shortcut for `Ref.isRef`. |
 | `isEqual(a, b)` | Shortcut for `Ref.isEqual`. |
+| `unwrap(valueOrRef)` | Shortcut for `Ref.unwrap`. Returns the value, reading `.value` if given a ref. |
 | `Units` | Reactive `Size` / `Position` / `Unit` constructors. See [Units](/reference/units). |
 | `Size(...)` | Shortcut for `Units.Size`. |
 | `Position(...)` | Shortcut for `Units.Position`. |
