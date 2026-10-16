@@ -7,11 +7,9 @@ title: Frame
 A basic container. Maps to Roblox [Frame](https://create.roblox.com/docs/reference/engine/classes/Frame).
 
 ```luau
-Widgets.Frame {
-    properties = {
-        size = Units.Size(200, 200),
-        backgroundColor = Color3.fromRGB(30, 30, 30),
-    }
+PeanutUI.Frame {
+    size = PeanutUI.Size(200, 200),
+    backgroundColor = Color3.fromRGB(30, 30, 30),
 }
 ```
 
@@ -26,21 +24,15 @@ Frame uses the [shared widget events](/reference/widgets/#shared-events) with no
 ## Example
 
 ```luau
-Widgets.Frame(
+PeanutUI.Frame(
     {
-        properties = {
-            size = Units.Size(200, 200),
-            backgroundColor = Color3.fromRGB(30, 30, 30),
-        },
-        modifiers = {
-            cornerRadius = { all = Units.Unit(12) },
-            padding = { all = Units.Unit(16) },
-        },
+        size = PeanutUI.Size(200, 200),
+        backgroundColor = Color3.fromRGB(30, 30, 30),
+        cornerRadius = { all = PeanutUI.Unit(12) },
+        padding = { all = PeanutUI.Unit(16) },
     },
     {
-        Widgets.TextLabel {
-            properties = { text = "Hello" }
-        },
+        PeanutUI.TextLabel { text = "Hello" }
     }
 )
 ```

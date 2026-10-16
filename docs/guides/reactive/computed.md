@@ -7,7 +7,7 @@ title: Computed
 A computed is a ref whose value is derived from other refs. It tracks its dependencies automatically and recomputes only when one of them changes.
 
 ```luau
-const sum = Ref.computed(function()
+const sum = PeanutUI.Computed(function()
     return a.value + b.value
 end)
 ```
@@ -17,10 +17,10 @@ end)
 When you read a computed's `.value`, it runs the function and records which refs were read. When any of those refs change, the computed is marked dirty. The next time something reads it, it recomputes.
 
 ```luau
-const a = Ref.new(2)
-const b = Ref.new(3)
+const a = PeanutUI.Ref(2)
+const b = PeanutUI.Ref(3)
 
-const sum = Ref.computed(function()
+const sum = PeanutUI.Computed(function()
     return a.value + b.value
 end)
 
@@ -44,9 +44,9 @@ Computed functions must be **pure**. Creating refs, watching, or mutating state 
 
 ```luau
 -- This errors
-const refOutside = Ref.new(0)
-const bad = Ref.computed(function()
-    const other = Ref.new(0)   -- side effect!
+const refOutside = PeanutUI.Ref(0)
+const bad = PeanutUI.Computed(function()
+    const other = PeanutUI.Ref(0)   -- side effect!
     refOutside.value += 1  -- side effect too!
     return other.value
 end)
@@ -57,28 +57,26 @@ end)
 Computed values are the usual way to make a property reactive:
 
 ```luau
-Widgets.TextLabel {
-    properties = {
-        text = Ref.computed(function()
-            return `Count: {count.value}`
-        end),
-    }
+PeanutUI.TextLabel {
+    text = PeanutUI.Computed(function()
+        return `Count: {count.value}`
+    end),
 }
 ```
 
 ## Equality shortcut {#equality}
 
-For simple comparisons, `Ref.isEqual` is a shortcut:
+For simple comparisons, `PeanutUI.isEqual` is a shortcut:
 
 ```luau
-const isTouch = Ref.isEqual(State.preferredInput, "touch")
+const isTouch = PeanutUI.isEqual(PeanutUI.preferredInput, "touch")
 ```
 
 It's equivalent to:
 
 ```luau
-const isTouch = Ref.computed(function()
-    return State.preferredInput.value == "touch"
+const isTouch = PeanutUI.Computed(function()
+    return PeanutUI.preferredInput.value == "touch"
 end)
 ```
 

@@ -7,8 +7,8 @@ title: Widgets
 Widgets are the declarative constructors you build your UI out of. Each one maps to a Roblox [GuiObject](https://create.roblox.com/docs/reference/engine/classes/GuiObject) and is called as a table constructor:
 
 ```luau
-Widgets.Frame {
-    properties = { size = Units.Size(200, 200) }
+PeanutUI.Frame {
+    size = PeanutUI.Size(200, 200)
 }
 ```
 
@@ -17,18 +17,18 @@ Widgets.Frame {
 Every widget accepts an optional props table and an optional children table:
 
 ```luau
-Widgets.Frame(props, children)
+PeanutUI.Frame(props, children)
 ```
 
-- **`props`** — a table of widget arguments (`properties`, `modifiers`, `events`, `transitions`, `animations`).
+- **`props`** — a flat table of widget arguments. Properties, events, and modifiers are written as keys directly; `transitions`, `animations`, `children`, `onSetup`, and `widgetName` are reserved keys.
 - **`children`** — a table of child widgets. Equivalent to `props.children`, but kept separate so structure is visible at a glance.
 
 ```luau
-Widgets.Frame(
-    { properties = { size = Units.Size(200, 200) } },
+PeanutUI.Frame(
+    { size = PeanutUI.Size(200, 200) },
     {
-        Widgets.TextLabel { properties = { text = "Hi" } },
-        Widgets.TextButton { properties = { text = "Click" } },
+        PeanutUI.TextLabel { text = "Hi" },
+        PeanutUI.TextButton { text = "Click" },
     }
 )
 ```
@@ -37,22 +37,22 @@ Widgets.Frame(
 Passing both `props.children` and a second `children` argument errors. Use one or the other.
 :::
 
-## Simplified API
+## Flat props
 
-Widgets also accept a flat table where properties, events, and modifiers are classified by key name, so you can skip the `properties` / `events` / `modifiers` nesting:
+Properties, events, and modifiers are classified by key name, so you write them flat:
 
 ```luau
-Widgets.TextButton {
+PeanutUI.TextButton {
     text = "Click me",
-    size = Units.Size(200, 60),
-    cornerRadius = { all = Units.Unit(12) },
+    size = PeanutUI.Size(200, 60),
+    cornerRadius = { all = PeanutUI.Unit(12) },
     Activated = function()
         print("clicked")
     end,
 }
 ```
 
-See [Simplified API](/guides/widgets#simplified-api) in the widgets guide for the full rules.
+See [Flat props](/guides/widgets#flat-props) in the widgets guide for the full rules.
 
 ## Available widgets
 

@@ -7,9 +7,9 @@ title: List
 Arranges children in a line, optionally wrapping.
 
 ```luau
-modifiers = {
+PeanutUI.Frame {
     list = {
-        gap = Units.Unit(8),
+        gap = PeanutUI.Unit(8),
         horizontal = true,
     }
 }

@@ -25,8 +25,8 @@ const Animations = PeanutUI.Animations
 Attach them in the `animations` table:
 
 ```luau
-Widgets.TextLabel {
-    properties = { text = "Spinning" },
+PeanutUI.TextLabel {
+    text = "Spinning",
     animations = {
         spin = Animations.Spin(120),
         float = Animations.Float(15, 0.3),

@@ -7,9 +7,9 @@ title: Table
 Arranges children in a table layout.
 
 ```luau
-modifiers = {
+PeanutUI.Frame {
     table = {
-        gap = Units.Size(8, 8),
+        gap = PeanutUI.Size(8, 8),
         majorAxis = "RowMajor",
     }
 }

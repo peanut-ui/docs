@@ -7,13 +7,11 @@ title: ImageButton
 A clickable image. Maps to Roblox [ImageButton](https://create.roblox.com/docs/reference/engine/classes/ImageButton).
 
 ```luau
-Widgets.ImageButton {
-    properties = { imageContent = "rbxassetid://123456" },
-    events = {
-        Activated = function()
-            print("clicked")
-        end,
-    },
+PeanutUI.ImageButton {
+    imageContent = "rbxassetid://123456",
+    Activated = function()
+        print("clicked")
+    end,
 }
 ```
 

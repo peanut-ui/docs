@@ -7,10 +7,8 @@ title: TextBox
 An editable text field. Maps to Roblox [TextBox](https://create.roblox.com/docs/reference/engine/classes/TextBox).
 
 ```luau
-Widgets.TextBox {
-    properties = {
-        placeholderText = "Type here...",
-    }
+PeanutUI.TextBox {
+    placeholderText = "Type here...",
 }
 ```
 

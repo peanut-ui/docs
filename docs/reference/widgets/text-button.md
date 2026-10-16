@@ -7,13 +7,11 @@ title: TextButton
 A clickable text button. Maps to Roblox [TextButton](https://create.roblox.com/docs/reference/engine/classes/TextButton).
 
 ```luau
-Widgets.TextButton {
-    properties = { text = "Click me" },
-    events = {
-        Activated = function()
-            print("clicked")
-        end,
-    },
+PeanutUI.TextButton {
+    text = "Click me",
+    Activated = function()
+        print("clicked")
+    end,
 }
 ```
 

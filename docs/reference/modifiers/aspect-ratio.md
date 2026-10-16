@@ -7,7 +7,7 @@ title: AspectRatio
 Locks a widget to a specific aspect ratio.
 
 ```luau
-modifiers = {
+PeanutUI.Frame {
     aspectRatio = {
         ratio = 16 / 9,
         type = "FitWithinMaxSize",

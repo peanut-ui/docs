@@ -12,7 +12,6 @@ Declarative widget constructors. See the [widget](/reference/widgets/) or [space
 
 | Export | Description |
 |---|---|
-| `Widgets` | Table of widget constructors (`Widgets.Frame`, `Widgets.TextLabel`, ...). |
 | `Space` | Render root widget. |
 | `createScreenSpace(name)` | Shortcut for `Space.createScreenSpace`. |
 | `createBillboardSpace(name)` | Shortcut for `Space.createBillboardSpace`. |
@@ -20,65 +19,54 @@ Declarative widget constructors. See the [widget](/reference/widgets/) or [space
 | `getScreenSpace(name)` | Shortcut for `Space.getScreenSpace`. |
 | `getBillboardSpace(name)` | Shortcut for `Space.getBillboardSpace`. |
 | `getSurfaceSpace(name)` | Shortcut for `Space.getSurfaceSpace`. |
-| `Frame` | Shortcut for `Widgets.Frame`. |
-| `ScrollingFrame` | Shortcut for `Widgets.ScrollingFrame`. |
-| `CanvasGroup` | Shortcut for `Widgets.CanvasGroup`. |
-| `ImageLabel` | Shortcut for `Widgets.ImageLabel`. |
-| `ImageButton` | Shortcut for `Widgets.ImageButton`. |
-| `TextLabel` | Shortcut for `Widgets.TextLabel`. |
-| `TextButton` | Shortcut for `Widgets.TextButton`. |
-| `TextBox` | Shortcut for `Widgets.TextBox`. |
-| `ViewportFrame` | Shortcut for `Widgets.ViewportFrame`. |
-| `VideoFrame` | Shortcut for `Widgets.VideoFrame`. |
+| `Frame` | Widget constructor for `Frame`. |
+| `ScrollingFrame` | Widget constructor for `ScrollingFrame`. |
+| `CanvasGroup` | Widget constructor for `CanvasGroup`. |
+| `ImageLabel` | Widget constructor for `ImageLabel`. |
+| `ImageButton` | Widget constructor for `ImageButton`. |
+| `TextLabel` | Widget constructor for `TextLabel`. |
+| `TextButton` | Widget constructor for `TextButton`. |
+| `TextBox` | Widget constructor for `TextBox`. |
+| `ViewportFrame` | Widget constructor for `ViewportFrame`. |
+| `VideoFrame` | Widget constructor for `VideoFrame`. |
 
 ## Components
 
 | Export | Description |
 |---|---|
-| `Component.defineComponent(fn)` | Creates a component with lifecycle controls. |
-| `Component.onSetup(fn)` | Runs after the component function creates its widget. |
-| `Component.onCreated(fn)` | Runs when the Roblox GUI object is created. |
-| `Component.onBeforeDestroyed(fn)` | Runs before destruction; widget and object still available. |
-| `Component.onDestroyed(fn)` | Runs after destruction. |
-| `Component.If(cond, fn)` | Reactive branching. See [Conditionals & Loops](/guides/reactive/control-flow). |
-| `Component.For(items, fn)` | Static loop over items. |
-| `Component.ReactiveFor(items, fn)` | Reactive loop over items. |
-| `Component.Lazy(fn)` | Defers widget creation until the `ObjectCreateScheduled` stage. See [Lazy](/guides/reactive/control-flow#lazy). |
-| `Component.makeStory(fn)` | Defines a story for in-engine preview. |
-| `defineComponent(fn)` | Shortcut for `Component.defineComponent`. |
-| `onSetup(fn)` | Shortcut for `Component.onSetup`. |
-| `onCreated(fn)` | Shortcut for `Component.onCreated`. |
-| `onBeforeDestroyed(fn)` | Shortcut for `Component.onBeforeDestroyed`. |
-| `onDestroyed(fn)` | Shortcut for `Component.onDestroyed`. |
-| `If(cond, fn)` | Shortcut for `Component.If`. |
-| `For(items, fn)` | Shortcut for `Component.For`. |
-| `ReactiveFor(items, fn)` | Shortcut for `Component.ReactiveFor`. |
-| `Lazy(fn)` | Shortcut for `Component.Lazy`. |
-| `makeStory(fn)` | Shortcut for `Component.makeStory`. |
+| `defineComponent(fn)` | Creates a component with lifecycle controls. |
+| `onSetup(fn)` | Runs after the component function creates its widget. |
+| `onCreated(fn)` | Runs when the Roblox GUI object is created. |
+| `onBeforeDestroyed(fn)` | Runs before destruction; widget and object still available. |
+| `onDestroyed(fn)` | Runs after destruction. |
+| `If(cond, fn)` | Reactive branching. See [Conditionals & Loops](/guides/reactive/control-flow). |
+| `For(items, fn)` | Static loop over items. |
+| `ReactiveFor(items, fn)` | Reactive loop over items. |
+| `Lazy(fn)` | Defers widget creation until the `ObjectCreateScheduled` stage. See [Lazy](/guides/reactive/control-flow#lazy). |
+| `makeStory(fn)` | Defines a story for in-engine preview. |
 
 ## Reactivity
 
 | Export | Description |
 |---|---|
-| `Ref` | Ref module (`Ref.new`, `Ref.computed`, `Ref.reactive`, ...). |
-| `ref(value)` | Shortcut for `Ref.new`. |
-| `computed(fn)` | Shortcut for `Ref.computed`. |
-| `reactive(table)` | Shortcut for `Ref.reactive`. |
-| `getRef(proxy)` | Shortcut for `Ref.getRef`. |
-| `toRef(proxy, key)` | Shortcut for `Ref.toRef`. |
-| `isRef(obj)` | Shortcut for `Ref.isRef`. |
-| `isEqual(a, b)` | Shortcut for `Ref.isEqual`. |
-| `unwrap(valueOrRef)` | Shortcut for `Ref.unwrap`. Returns the value, reading `.value` if given a ref. |
-| `Units` | Reactive `Size` / `Position` / `Unit` constructors. See [Units](/reference/units). |
-| `Size(...)` | Shortcut for `Units.Size`. |
-| `Position(...)` | Shortcut for `Units.Position`. |
-| `Unit(...)` | Shortcut for `Units.Unit`. |
-| `PositionFromUDim2(udim2)` | Shortcut for `Units.PositionFromUDim2`. |
-| `UnitFromUDim(udim)` | Shortcut for `Units.UnitFromUDim`. |
-| `ToUDim2(value)` | Shortcut for `Units.ToUDim2`. |
-| `ToUDim(value)` | Shortcut for `Units.ToUDim`. |
-| `Scaling` | Responsive pixel scaling for a Space. See [Scaling](/reference/scaling). |
-| `State` | Global reactive state (`State.preferredInput`, ...). |
+| `Ref(value)` | Creates a ref. |
+| `Computed(fn)` | Creates a computed ref. |
+| `Reactive(table, shallow?)` | Wraps a table in a reactive proxy. |
+| `getRef(proxy)` | Gets the ref backing a reactive proxy field. |
+| `toRef(proxy, key)` | Reads a reactive proxy field as a ref. |
+| `isRef(obj)` | Whether a value is a ref. |
+| `isEqual(a, b)` | Creates a computed boolean comparing a ref to a value or ref. |
+| `unwrap(valueOrRef)` | Returns the value, reading `.value` if given a ref. |
+| `Size(...)` | Reactive size constructor. See [Units](/reference/units). |
+| `Position(...)` | Reactive position constructor. |
+| `Unit(...)` | Reactive unit constructor. |
+| `PositionFromUDim2(udim2)` | Converts a `UDim2` to a `Position`. |
+| `UnitFromUDim(udim)` | Converts a `UDim` to a `Unit`. |
+| `ToUDim2(value)` | Converts a `Size`, `Position`, or `UDim2` to a `UDim2`. |
+| `ToUDim(value)` | Converts a `Unit`, `UDim`, or number to a `UDim`. |
+| `simpleScale` | Responsive pixel scaling for a Space. See [Scaling](/reference/scaling). |
+| `preferredInput` | Reactive preferred input (`"gamepad"`, `"desktop"`, `"touch"`). |
+| `globalSignals` | Global signals. |
 
 ## Animations
 
@@ -105,8 +93,6 @@ See the [Scheduler reference](/reference/scheduler) for stages, phases, and the 
 |---|---|
 | `version` | Version table. |
 | `versionString` | Version string. |
-| `preferredInput` | Reactive preferred input (`"gamepad"`, `"desktop"`, `"touch"`). |
-| `globalSignals` | Global signals. |
 
 ## Misc
 
@@ -114,4 +100,3 @@ See the [Scheduler reference](/reference/scheduler) for stages, phases, and the 
 |---|---|
 | `Logging` | Logging module (`logger.error`, `logger.critical`, ...). |
 | `Undefined` | The `Undefined` sentinel, distinct from `nil`. |
-| `simpleScale` | Shortcut for `Scaling.simpleScale`. |

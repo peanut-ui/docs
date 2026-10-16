@@ -7,10 +7,8 @@ title: ScrollingFrame
 A scrollable container. Maps to Roblox [ScrollingFrame](https://create.roblox.com/docs/reference/engine/classes/ScrollingFrame).
 
 ```luau
-Widgets.ScrollingFrame {
-    properties = {
-        canvasSize = Units.Size(0, 0, 1, 2),
-    }
+PeanutUI.ScrollingFrame {
+    canvasSize = PeanutUI.Size(0, 0, 1, 2),
 }
 ```
 

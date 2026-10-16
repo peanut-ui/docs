@@ -7,23 +7,32 @@ title: Component
 A component is a function that returns a widget, with lifecycle hooks attached. Components are how you package reusable UI.
 
 ```luau
-const Component = PeanutUI.Component
+PeanutUI.defineComponent
+PeanutUI.onSetup
+PeanutUI.onCreated
+PeanutUI.onBeforeDestroyed
+PeanutUI.onDestroyed
+PeanutUI.makeStory
+
+PeanutUI.TextLabel
+PeanutUI.Ref
+PeanutUI.Computed
+PeanutUI.Reactive
+PeanutUI.toRef
 ```
 
 ## Defining a component {#define}
 
-`Component.defineComponent` takes a function that receives props and returns a widget:
+`PeanutUI.defineComponent` takes a function that receives props and returns a widget:
 
 ```luau
-const Counter = Component.defineComponent(function(props: { start: number })
-    const count = Ref.new(props.start)
+const Counter = PeanutUI.defineComponent(function(props: { start: number })
+    const count = PeanutUI.Ref(props.start)
 
-    return Widgets.TextLabel {
-        properties = {
-            text = Ref.computed(function()
-                return `Count: {count.value}`
-            end),
-        },
+    return PeanutUI.TextLabel {
+        text = PeanutUI.Computed(function()
+            return `Count: {count.value}`
+        end),
     }
 end)
 ```
@@ -40,31 +49,31 @@ Hooks must be called **while the component is being defined** — inside the `de
 
 | Hook | When it runs |
 |---|---|
-| `Component.onSetup(fn)` | After the component function creates its widget. Receives the root widget. |
-| `Component.onCreated(fn)` | When the Roblox GUI object is created. Receives the object. |
-| `Component.onBeforeDestroyed(fn)` | Before destruction. Widget and object still available. |
-| `Component.onDestroyed(fn)` | After destruction. Widget, refs, and object are gone. |
+| `PeanutUI.onSetup(fn)` | After the component function creates its widget. Receives the root widget. |
+| `PeanutUI.onCreated(fn)` | When the Roblox GUI object is created. Receives the object. |
+| `PeanutUI.onBeforeDestroyed(fn)` | Before destruction. Widget and object still available. |
+| `PeanutUI.onDestroyed(fn)` | After destruction. Widget, refs, and object are gone. |
 
 ```luau
-const Test = Component.defineComponent(function(props: { test: string })
-    Component.onSetup(function(widget)
+const Test = PeanutUI.defineComponent(function(props: { test: string })
+    PeanutUI.onSetup(function(widget)
         print("Widget setup!")
     end)
 
-    Component.onCreated(function(object)
+    PeanutUI.onCreated(function(object)
         print("Roblox object created!")
     end)
 
-    Component.onBeforeDestroyed(function()
+    PeanutUI.onBeforeDestroyed(function()
         print("Cleaning up!")
     end)
 
-    Component.onDestroyed(function()
+    PeanutUI.onDestroyed(function()
         print("Widget is dead...")
     end)
 
-    return Widgets.TextLabel {
-        properties = { text = props.test }
+    return PeanutUI.TextLabel {
+        text = props.test
     }
 end)
 ```
@@ -81,20 +90,18 @@ Passing refs to **children** is okay if they're **never re-parented**.
 
 ## Reactive props
 
-You can pass a reactive table as props and read individual fields with `Ref.toRef`:
+You can pass a reactive table as props and read individual fields with `PeanutUI.toRef`:
 
 ```luau
-const props = Ref.reactive({ test = "Hello" })
+const props = PeanutUI.Reactive({ test = "Hello" })
 
-const Test = Component.defineComponent(function(props)
-    const test = Ref.toRef(props, "test")
+const Test = PeanutUI.defineComponent(function(props)
+    const test = PeanutUI.toRef(props, "test")
 
-    return Widgets.TextLabel {
-        properties = {
-            text = Ref.computed(function()
-                return test.value
-            end),
-        },
+    return PeanutUI.TextLabel {
+        text = PeanutUI.Computed(function()
+            return test.value
+        end),
     }
 end)
 ```
@@ -103,10 +110,10 @@ Mutating `props.test` updates the component.
 
 ## Stories
 
-`Component.makeStory` defines a story for FlipBook/UILabs:
+`PeanutUI.makeStory` defines a story for FlipBook/UILabs:
 
 ```luau
-const story = Component.makeStory(function()
+const story = PeanutUI.makeStory(function()
     return Counter({ start = 0 })
 end)
 ```

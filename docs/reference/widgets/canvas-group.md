@@ -7,10 +7,8 @@ title: CanvasGroup
 A container that applies group transparency and color to its descendants. Maps to Roblox [CanvasGroup](https://create.roblox.com/docs/reference/engine/classes/CanvasGroup).
 
 ```luau
-Widgets.CanvasGroup {
-    properties = {
-        groupTransparency = 0.5,
-    }
+PeanutUI.CanvasGroup {
+    groupTransparency = 0.5,
 }
 ```
 

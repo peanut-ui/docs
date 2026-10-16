@@ -7,11 +7,9 @@ title: TextLabel
 Displays text. Maps to Roblox [TextLabel](https://create.roblox.com/docs/reference/engine/classes/TextLabel).
 
 ```luau
-Widgets.TextLabel {
-    properties = {
-        text = "Hello",
-        textSize = 18,
-    }
+PeanutUI.TextLabel {
+    text = "Hello",
+    textSize = 18,
 }
 ```
 

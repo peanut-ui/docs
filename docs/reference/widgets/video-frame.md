@@ -7,11 +7,9 @@ title: VideoFrame
 Plays a video. Maps to Roblox [VideoFrame](https://create.roblox.com/docs/reference/engine/classes/VideoFrame).
 
 ```luau
-Widgets.VideoFrame {
-    properties = {
-        video = "rbxassetid://123456",
-        playing = true,
-    }
+PeanutUI.VideoFrame {
+    video = "rbxassetid://123456",
+    playing = true,
 }
 ```
 

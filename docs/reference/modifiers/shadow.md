@@ -7,10 +7,10 @@ title: Shadow
 Adds a drop shadow to a widget.
 
 ```luau
-modifiers = {
+PeanutUI.Frame {
     shadow = {
-        blurRadius = Units.Unit(16),
-        offset = Units.Position(0, 4),
+        blurRadius = PeanutUI.Unit(16),
+        offset = PeanutUI.Position(0, 4),
         transparency = 0.6,
     }
 }
@@ -19,10 +19,10 @@ modifiers = {
 Use `shadows` to attach multiple shadows:
 
 ```luau
-modifiers = {
+PeanutUI.Frame {
     shadows = {
-        { blurRadius = Units.Unit(16), offset = Units.Position(0, 0), transparency = 0.6 },
-        { blurRadius = Units.Unit(24), offset = Units.Position(0, 4), transparency = 0.7 },
+        { blurRadius = PeanutUI.Unit(16), offset = PeanutUI.Position(0, 0), transparency = 0.6 },
+        { blurRadius = PeanutUI.Unit(24), offset = PeanutUI.Position(0, 4), transparency = 0.7 },
     }
 }
 ```

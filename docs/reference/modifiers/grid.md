@@ -7,10 +7,10 @@ title: Grid
 Arranges children in a grid.
 
 ```luau
-modifiers = {
+PeanutUI.Frame {
     grid = {
-        cellSize = Units.Size(64, 64),
-        gap = Units.Size(8, 8),
+        cellSize = PeanutUI.Size(64, 64),
+        gap = PeanutUI.Size(8, 8),
     }
 }
 ```

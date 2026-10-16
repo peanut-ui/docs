@@ -7,7 +7,12 @@ title: Widgets
 Widgets are the declarative constructors you build your UI out of. Each one maps to a Roblox `GuiObject`.
 
 ```luau
-const Widgets = PeanutUI.Widgets
+PeanutUI.Frame
+PeanutUI.TextLabel
+PeanutUI.TextButton
+
+PeanutUI.Size
+PeanutUI.Unit
 ```
 
 ## Calling convention
@@ -15,17 +20,17 @@ const Widgets = PeanutUI.Widgets
 Every widget takes an optional props table and an optional children table:
 
 ```luau
-Widgets.Frame(props, children)
+PeanutUI.Frame(props, children)
 ```
 
 ```luau
-Widgets.Frame(
+PeanutUI.Frame(
     {
-        properties = { size = Units.Size(200, 200) },
-        modifiers = { cornerRadius = { all = Units.Unit(12) } },
+        size = PeanutUI.Size(200, 200),
+        cornerRadius = { all = PeanutUI.Unit(12) },
     },
     {
-        Widgets.TextLabel { properties = { text = "Hi" } },
+        PeanutUI.TextLabel { text = "Hi" },
     }
 )
 ```
@@ -33,9 +38,9 @@ Widgets.Frame(
 The single-table form also works:
 
 ```luau
-Widgets.Frame {
-    properties = { size = Units.Size(200, 200) },
-    children = { Widgets.TextLabel { properties = { text = "Hi" } } },
+PeanutUI.Frame {
+    size = PeanutUI.Size(200, 200),
+    children = { PeanutUI.TextLabel { text = "Hi" } },
 }
 ```
 
@@ -43,43 +48,29 @@ Widgets.Frame {
 Passing both `props.children` and a second `children` argument errors.
 :::
 
-## Simplified API
+## Flat props
 
-You don't have to nest everything under `properties`, `events`, and `modifiers`. A widget accepts a **flat** table where each key is classified automatically:
+A widget's props table is **flat**. Each key is classified automatically:
 
 - Keys matching a widget property (`size`, `text`, `backgroundColor`, ...) become properties.
 - Keys matching a known event (`Activated`, `InputBegan`, ...) become event handlers.
 - Keys matching a modifier (`cornerRadius`, `padding`, `list`, ...) become modifiers.
 
 ```luau
-Widgets.TextButton {
+PeanutUI.TextButton {
     text = "Click me",
-    size = Units.Size(200, 60),
-    cornerRadius = { all = Units.Unit(12) },
+    size = PeanutUI.Size(200, 60),
+    cornerRadius = { all = PeanutUI.Unit(12) },
     Activated = function()
         print("clicked")
     end,
 }
 ```
 
-This is equivalent to the nested form:
-
-```luau
-Widgets.TextButton {
-    properties = { text = "Click me", size = Units.Size(200, 60) },
-    modifiers = { cornerRadius = { all = Units.Unit(12) } },
-    events = {
-        Activated = function()
-            print("clicked")
-        end,
-    },
-}
-```
-
-Both forms can be mixed — flat keys are merged with any explicit `properties`, `events`, or `modifiers` tables (explicit tables win on conflict).
+Classification is by name, so a key that is both a property and an event resolves to the event, and a key that is both a property and a modifier resolves to the modifier. In practice the three namespaces don't overlap.
 
 ::: tip
-Only properties, events, and modifiers can be written flat. Everything else — `children`, `transitions`, `animations`, `onSetup`, `widgetName` — must stay nested.
+Only properties, events, and modifiers can be written flat. Everything else — `children`, `transitions`, `animations`, `onSetup`, `widgetName` — is a reserved key and stays as-is.
 :::
 
 ## Props
@@ -88,9 +79,9 @@ A props table can contain:
 
 | Key | Description |
 |---|---|
-| `properties` | Widget properties (`size`, `backgroundColor`, `text`, ...). |
-| `modifiers` | Styling and layout modifiers. See [Modifiers](/reference/modifiers/). |
-| `events` | Event handlers. |
+| *(any property)* | Widget properties (`size`, `backgroundColor`, `text`, ...). |
+| *(any modifier)* | Styling and layout modifiers. See [Modifiers](/reference/modifiers/). |
+| *(any event)* | Event handlers. |
 | `transitions` | Animations that run when a property changes. |
 | `animations` | Continuous animations. |
 | `children` | Child widgets. Equivalent to the second argument. |
@@ -103,24 +94,19 @@ A props table can contain:
 Properties are the widget's own values. They can be plain values or [Refs](/guides/reactive/values):
 
 ```luau
-Widgets.TextLabel {
-    properties = {
-        text = "Static",
-        textSize = 18,
-    }
+PeanutUI.TextLabel {
+    text = "Static",
+    textSize = 18,
 }
 ```
 
 ```luau
-const ref = PeanutUI.ref
-const count = ref(0)
+const count = PeanutUI.Ref(0)
 
-Widgets.TextLabel {
-    properties = {
-        text = Ref.computed(function()
-            return `Count: {count.value}`
-        end),
-    }
+PeanutUI.TextLabel {
+    text = PeanutUI.Computed(function()
+        return `Count: {count.value}`
+    end),
 }
 ```
 
@@ -128,16 +114,14 @@ See the [widget reference](/reference/widgets/) for the full property list per w
 
 ## Events
 
-Handlers go in the `events` table:
+Handlers are written as keys directly on the props table:
 
 ```luau
-Widgets.TextButton {
-    properties = { text = "Click me" },
-    events = {
-        Activated = function()
-            print("clicked")
-        end,
-    },
+PeanutUI.TextButton {
+    text = "Click me",
+    Activated = function()
+        print("clicked")
+    end,
 }
 ```
 
@@ -146,13 +130,11 @@ Widgets.TextButton {
 Modifiers add styling and layout — corners, padding, strokes, lists:
 
 ```luau
-Widgets.Frame {
-    properties = { size = Units.Size(200, 200) },
-    modifiers = {
-        cornerRadius = { all = Units.Unit(12) },
-        padding = { all = Units.Unit(16) },
-        list = { gap = Units.Unit(8) },
-    },
+PeanutUI.Frame {
+    size = PeanutUI.Size(200, 200),
+    cornerRadius = { all = PeanutUI.Unit(12) },
+    padding = { all = PeanutUI.Unit(16) },
+    list = { gap = PeanutUI.Unit(8) },
 }
 ```
 
@@ -163,11 +145,11 @@ See the [modifier reference](/reference/modifiers/) for the full list.
 Children are widgets nested inside. Pass them as the second argument, or as `props.children`:
 
 ```luau
-Widgets.Frame(
-    { properties = { size = Units.Size(200, 200) } },
+PeanutUI.Frame(
+    { size = PeanutUI.Size(200, 200) },
     {
-        Widgets.TextLabel { properties = { text = "One" } },
-        Widgets.TextLabel { properties = { text = "Two" } },
+        PeanutUI.TextLabel { text = "One" },
+        PeanutUI.TextLabel { text = "Two" },
     }
 )
 ```

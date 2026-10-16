@@ -7,11 +7,9 @@ title: ImageLabel
 Displays an image. Maps to Roblox [ImageLabel](https://create.roblox.com/docs/reference/engine/classes/ImageLabel).
 
 ```luau
-Widgets.ImageLabel {
-    properties = {
-        imageContent = "rbxassetid://123456",
-        size = Units.Size(64, 64),
-    }
+PeanutUI.ImageLabel {
+    imageContent = "rbxassetid://123456",
+    size = PeanutUI.Size(64, 64),
 }
 ```
 

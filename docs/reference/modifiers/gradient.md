@@ -7,7 +7,7 @@ title: Gradient
 Applies a gradient fill to a widget.
 
 ```luau
-modifiers = {
+PeanutUI.Frame {
     gradient = {
         color = ColorSequence.new(Color3.new(1, 0, 0), Color3.new(0, 0, 1)),
         rotation = 45,

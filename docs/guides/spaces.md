@@ -32,7 +32,7 @@ For UI that floats in 3D space:
 ```luau
 const billboard = Space.createBillboardSpace("HealthBar", {
     adornee = somePart,
-    size = Units.Size(200, 50),
+    size = PeanutUI.Size(200, 50),
 })
 ```
 

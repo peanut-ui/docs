@@ -7,8 +7,8 @@ title: Padding
 Adds inner padding to a widget.
 
 ```luau
-modifiers = {
-    padding = { all = Units.Unit(16) }
+PeanutUI.Frame {
+    padding = { all = PeanutUI.Unit(16) }
 }
 ```
 

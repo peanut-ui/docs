@@ -34,7 +34,7 @@ const space = Space.createScreenSpace("Main")
 Auto scale will scale whole UI using reference resolution. So UI always fits on every screen. See reference [here](/reference/scaling).
 
 ```luau
-Scaling.simpleScale(
+PeanutUI.simpleScale(
     space,
     Vector2.new(844, 390),
     true
@@ -43,27 +43,17 @@ Scaling.simpleScale(
 
 ## Define a component
 
-[Components](/guides/component) are the unit of composition. `Component.defineComponent` wraps a function that returns a root widget, and gives you a lifecycle [bucket](/guides/thinking-in-peanut#definitions) for refs and hooks:
+[Components](/guides/component) are the unit of composition. `PeanutUI.defineComponent` wraps a function that returns a root widget, and gives you a lifecycle [bucket](/guides/thinking-in-peanut#definitions) for refs and hooks:
 
 ```luau
-const Component = PeanutUI.Component
-const Widgets = PeanutUI.Widgets
-const Units = PeanutUI.Units
-
-const Hello = Component.defineComponent(function(props)
-    return Widgets.Frame {
-        properties = {
-            size = Units.Size(200, 200),
-            backgroundColor = Color3.fromRGB(30, 30, 30),
-        },
-        modifiers = {
-            cornerRadius = { all = Units.Unit(12) },
-            padding = { all = Units.Unit(16) },
-        },
+const Hello = PeanutUI.defineComponent(function(props)
+    return PeanutUI.Frame {
+        size = PeanutUI.Size(200, 200),
+        backgroundColor = Color3.fromRGB(30, 30, 30),
+        cornerRadius = { all = PeanutUI.Unit(12) },
+        padding = { all = PeanutUI.Unit(16) },
         children = {
-            Widgets.TextLabel {
-                properties = { text = props.text }
-            },
+            PeanutUI.TextLabel { text = props.text },
         },
     }
 end)

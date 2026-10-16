@@ -7,11 +7,11 @@ title: Scaling
 `Scaling` provides responsive pixel scaling for a [Space](/reference/space). It computes a scale factor from the Space's current size and a reference resolution, then installs it as the Space's scale function so every widget in the tree scales together.
 
 ```luau
-const Scaling = PeanutUI.Scaling
+PeanutUI.simpleScale
 ```
 
 ## Simple scale
-`Scaling.simpleScale(onSpace, referenceResolution, floorScale?, minScale?, maxScale?)`
+`PeanutUI.simpleScale(onSpace, referenceResolution, floorScale?, minScale?, maxScale?)`
 
 Applies responsive pixel scaling to a screen space.
 
@@ -26,7 +26,7 @@ The scale is calculated from the Space's current size and the reference resoluti
 | `maxScale` | `number?` | The largest scale allowed after calculating the screen scale. |
 
 ```luau
-Scaling.simpleScale(
+simpleScale(
     space,
     Vector2.new(844, 390),
     true
@@ -54,9 +54,9 @@ The reference resolution is the design baseline your UI is laid out for. Pick th
 | Roblox default | `Vector2.new(1280, 720)` | Common Roblox UI design baseline. |
 
 ```luau
-Scaling.simpleScale(space, Vector2.new(844, 390), true)   -- landscape phone, pixel-perfect
-Scaling.simpleScale(space, Vector2.new(390, 844))         -- portrait phone, smooth scaling
-Scaling.simpleScale(space, Vector2.new(1920, 1080), true) -- desktop, integer steps
+simpleScale(space, Vector2.new(844, 390), true)   -- landscape phone, pixel-perfect
+simpleScale(space, Vector2.new(390, 844))         -- portrait phone, smooth scaling
+simpleScale(space, Vector2.new(1920, 1080), true) -- desktop, integer steps
 ```
 
 ## Why reference resolution matters
@@ -73,7 +73,7 @@ The reference resolution is what makes your layout resolution-independent. You d
 
 `Scaling` exists so you can lay out your UI in plain pixels and never think about scaling again. You declare a reference resolution once, and the framework keeps the whole tree proportional on every screen.
 
-- **You don't have to care about scaling at all.** You write `Units.Size(150, 150)` and it just works on every screen. There is no scale factor threaded through your layout code and no downscaling of `AbsoluteSize` reads.
+- **You don't have to care about scaling at all.** You write `PeanutUI.Size(150, 150)` and it just works on every screen. There is no scale factor threaded through your layout code and no downscaling of `AbsoluteSize` reads.
 - **It scales the whole tree at once.** `Scaling` installs a scale function on the Space, so every widget in the tree scales together through the Space's `ScaleChanged` signal, and the factor is recomputed for you on every resize.
 - **It is reactive and reversible.** The installed scale function converts in both directions: `scaleFn(px)` scales a design value up to the screen, and `scaleFn(px, true)` recovers the original design value. That makes it safe to read back design-space numbers without breaking your layout.
 - **It respects pixel alignment.** `floorScale` rounds the scale down to an integer so edges and text stay crisp, and `minScale` / `maxScale` clamp the result.

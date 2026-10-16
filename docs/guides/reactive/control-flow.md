@@ -4,13 +4,13 @@ title: Conditionals & Loops
 
 # Conditionals & Loops {#header}
 
-`If`, `For`, and `ReactiveFor` build children reactively. They live in the `ControlFlow` module and are re-exported on `Component`.
+`If`, `For`, and `ReactiveFor` build children reactively. They are exported directly from PeanutUI.
 
 ```luau
-const Component = PeanutUI.Component
-const If = Component.If
-const For = Component.For
-const ReactiveFor = Component.ReactiveFor
+PeanutUI.If
+PeanutUI.For
+PeanutUI.ReactiveFor
+PeanutUI.Lazy
 ```
 
 ## If
@@ -18,22 +18,22 @@ const ReactiveFor = Component.ReactiveFor
 `If` picks a branch based on a condition, which can be a plain boolean or a ref:
 
 ```luau
-If(condition, function()
-    return Widgets.TextLabel { properties = { text = "Yes" } }
+PeanutUI.If(condition, function()
+    return PeanutUI.TextLabel { text = "Yes" }
 end).End()
 ```
 
 Chain `ElseIf` and `Else`, then call `End()`:
 
 ```luau
-If(Ref.isEqual(count, 1), function()
-    return Widgets.TextLabel { properties = { text = "One" } }
+PeanutUI.If(PeanutUI.isEqual(count, 1), function()
+    return PeanutUI.TextLabel { text = "One" }
 end)
-.ElseIf(Ref.isEqual(count, 2), function()
-    return Widgets.TextLabel { properties = { text = "Two" } }
+.ElseIf(PeanutUI.isEqual(count, 2), function()
+    return PeanutUI.TextLabel { text = "Two" }
 end)
 .Else(function()
-    return Widgets.TextLabel { properties = { text = "Many" } }
+    return PeanutUI.TextLabel { text = "Many" }
 end)
 .End()
 ```
@@ -41,7 +41,7 @@ end)
 When the condition changes, the branch is swapped automatically — the old widget is destroyed and the new one created.
 
 ::: tip
-For **static** values better use `if value then Widgets.TextLabel else nil`.
+For **static** values better use `if value then PeanutUI.TextLabel() else nil`.
 :::
 
 ::: warning
@@ -53,9 +53,9 @@ Do not use `If` for **frequently** changed values because it re-creates the whol
 `For` loops over a **static** table and creates a widget per item:
 
 ```luau
-For({ "a", "b", "c" }, function(value, index)
-    return Widgets.TextLabel {
-        properties = { text = value }
+PeanutUI.For({ "a", "b", "c" }, function(value, index)
+    return PeanutUI.TextLabel {
+        text = value
     }
 end)
 ```
@@ -65,11 +65,11 @@ end)
 `ReactiveFor` loops over a **reactive** table and updates as it changes:
 
 ```luau
-const items = Ref.reactive({ "a", "b" }, true)
+const items = PeanutUI.Reactive({ "a", "b" }, true)
 
-ReactiveFor(items, function(value)
-    return Widgets.TextLabel {
-        properties = { text = value }
+PeanutUI.ReactiveFor(items, function(value)
+    return PeanutUI.TextLabel {
+        text = value
     }
 end, function(value, index)
     return value   -- key
@@ -91,8 +91,8 @@ Use a **shallow** reactive table for `ReactiveFor` so nested tables don't cause 
 `Lazy` defers widget creation until the Roblox tree is being built — when widgets become visible to the user. The `createFn` is not called when the `Box` is built; it runs later, and the resulting widget is added and created then.
 
 ```luau
-Lazy(function()
-    return Widgets.TextLabel { properties = { text = "Created later" } }
+PeanutUI.Lazy(function()
+    return PeanutUI.TextLabel { text = "Created later" }
 end)
 ```
 
@@ -105,15 +105,15 @@ The most common case is an **invisible widget tree**: when a subtree starts hidd
 These return a `Box` widget, so they slot straight into a `children` list:
 
 ```luau
-Widgets.Frame(
-    { properties = { size = Units.Size(200, 200) } },
+PeanutUI.Frame(
+    { size = PeanutUI.Size(200, 200) },
     {
-        Widgets.TextLabel { properties = { text = "Header" } },
-        If(Ref.isEqual(count, 0), function()
-            return Widgets.TextLabel { properties = { text = "Empty" } }
+        PeanutUI.TextLabel { text = "Header" },
+        PeanutUI.If(PeanutUI.isEqual(count, 0), function()
+            return PeanutUI.TextLabel { text = "Empty" }
         end).End(),
-        For(items, function(value)
-            return Widgets.TextLabel { properties = { text = value } }
+        PeanutUI.For(items, function(value)
+            return PeanutUI.TextLabel { text = value }
         end),
     }
 )

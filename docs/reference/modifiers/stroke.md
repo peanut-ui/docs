@@ -7,7 +7,7 @@ title: Stroke
 Draws a border around a widget.
 
 ```luau
-modifiers = {
+PeanutUI.Frame {
     stroke = {
         thickness = 2,
         color = Color3.new(1, 1, 1),
@@ -18,10 +18,10 @@ modifiers = {
 Use `strokes` to attach multiple strokes:
 
 ```luau
-modifiers = {
+PeanutUI.Frame {
     strokes = {
         { thickness = 2, color = Color3.new(1, 1, 1) },
-        { thickness = 2, color = Color3.new(0, 0, 0), borderOffset = Units.Unit(2) },
+        { thickness = 2, color = Color3.new(0, 0, 0), borderOffset = PeanutUI.Unit(2) },
     }
 }
 ```

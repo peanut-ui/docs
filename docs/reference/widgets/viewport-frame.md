@@ -7,10 +7,8 @@ title: ViewportFrame
 Renders 3D content inside a 2D UI. Maps to Roblox [ViewportFrame](https://create.roblox.com/docs/reference/engine/classes/ViewportFrame).
 
 ```luau
-Widgets.ViewportFrame {
-    properties = {
-        currentCamera = workspace.CurrentCamera,
-    }
+PeanutUI.ViewportFrame {
+    currentCamera = workspace.CurrentCamera,
 }
 ```
 

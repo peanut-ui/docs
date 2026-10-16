@@ -7,7 +7,7 @@ title: Flex
 Controls how a widget behaves inside a flex layout.
 
 ```luau
-modifiers = {
+PeanutUI.Frame {
     flex = {
         mode = "Grow",
         growRatio = 1,

@@ -7,7 +7,7 @@ title: Scale
 Applies a UI scale factor to a widget.
 
 ```luau
-modifiers = {
+PeanutUI.Frame {
     scale = { scale = 1.5 }
 }
 ```

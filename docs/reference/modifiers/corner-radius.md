@@ -7,8 +7,8 @@ title: CornerRadius
 Rounds the corners of a widget.
 
 ```luau
-modifiers = {
-    cornerRadius = { all = Units.Unit(12) }
+PeanutUI.Frame {
+    cornerRadius = { all = PeanutUI.Unit(12) }
 }
 ```
 

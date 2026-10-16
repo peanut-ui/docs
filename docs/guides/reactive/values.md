@@ -7,31 +7,24 @@ title: Values
 Refs are PeanutUI's reactive primitive. A ref holds a value, and anything reading it updates when it changes.
 
 ```luau
--- Whole module
-const Ref = PeanutUI.Ref
+PeanutUI.Ref
+PeanutUI.Computed
+PeanutUI.Reactive
 
--- Or shortcuts
-const ref = PeanutUI.ref
-const computed = PeanutUI.computed
-const getRef = PeanutUI.getRef
-const toRef = PeanutUI.toRef
-const reactive = PeanutUI.reactive
-const isEqual = PeanutUI.isEqual
-const unwrap = PeanutUI.unwrap
+PeanutUI.getRef
+PeanutUI.toRef
+PeanutUI.isRef
+PeanutUI.isEqual
+PeanutUI.unwrap
 ```
 
 ## Creating a ref {#creating-ref}
 
 ```luau
-const count = Ref.new(0)
+const count = PeanutUI.Ref(0)
 ```
 
-The top-level shortcut `PeanutUI.ref` is the same function:
-
-```luau
-const ref = PeanutUI.ref
-const count = ref(0)
-```
+`PeanutUI.Ref` is the constructor itself, so you call it directly.
 
 ## Reading and writing {#reading-and-writing}
 
@@ -79,36 +72,36 @@ end)
 
 ## Reactive tables {#reactive}
 
-`Ref.reactive` wraps a table in a deep reactive proxy:
+`PeanutUI.Reactive` wraps a table in a deep reactive proxy:
 
 ```luau
-const state = reactive({ health = 100 })
+const state = PeanutUI.Reactive({ health = 100 })
 
 state.health -= 10   -- triggers update
 ```
 
-Read a field as a ref with `Ref.toRef`:
+Read a field as a ref with `PeanutUI.toRef`:
 
 ```luau
-const health = toRef(state, "health")
+const health = PeanutUI.toRef(state, "health")
 print(health.value)
 ```
 
 Use a **shallow** proxy when you don't want nested tables to trigger recalculations:
 
 ```luau
-const state = reactive({ items = {} }, true)
+const state = PeanutUI.Reactive({ items = {} }, true)
 ```
 
 ## Computed {#computed}
 
-`Ref.computed` derives a value from other refs:
+`PeanutUI.Computed` derives a value from other refs:
 
 ```luau
-const a = ref(2)
-const b = ref(3)
+const a = PeanutUI.Ref(2)
+const b = PeanutUI.Ref(3)
 
-const sum = computed(function()
+const sum = PeanutUI.Computed(function()
     return a.value + b.value
 end)
 
@@ -121,22 +114,22 @@ Computed values are **lazy** — they only recompute when something reads them a
 
 ## Equality shortcut {#is-equal}
 
-`Ref.isEqual` creates a computed boolean comparing a ref to a value or another ref:
+`PeanutUI.isEqual` creates a computed boolean comparing a ref to a value or another ref:
 
 ```luau
-const isTouch = isEqual(State.preferredInput, "touch")
+const isTouch = PeanutUI.isEqual(PeanutUI.preferredInput, "touch")
 print(isTouch.value)
 ```
 
 ## Unwrapping values {#unwrap}
 
-`Ref.unwrap` accepts either a ref or a plain value and returns the plain value. If it's given a ref, it reads `.value` (tracking it reactively); otherwise it returns the value unchanged:
+`PeanutUI.unwrap` accepts either a ref or a plain value and returns the plain value. If it's given a ref, it reads `.value` (tracking it reactively); otherwise it returns the value unchanged:
 
 ```luau
-const a = ref(2)
+const a = PeanutUI.Ref(2)
 
-print(unwrap(a))     -- 2
-print(unwrap(5))     -- 5
+print(PeanutUI.unwrap(a))     -- 2
+print(PeanutUI.unwrap(5))     -- 5
 ```
 
 This is useful when a value may or may not be a ref — for example a prop typed as `ValueOrRef<T>`. Reading it inside a computed tracks the ref only when one was passed:
@@ -144,20 +137,20 @@ This is useful when a value may or may not be a ref — for example a prop typed
 ```luau
 const someValue: ValueOrRef<number> = a
 
-const doubled = computed(function()
-    return unwrap(someValue) * 2
+const doubled = PeanutUI.Computed(function()
+    return PeanutUI.unwrap(someValue) * 2
 end)
 ```
 
 ## Global state {#state}
 
-`PeanutUI.State` holds global reactive state:
+`PeanutUI.preferredInput` is a reactive ref holding the player's preferred input:
 
 ```luau
-const State = PeanutUI.State
-
-print(State.preferredInput.value)   -- "gamepad" | "desktop" | "touch"
+print(PeanutUI.preferredInput.value)   -- "gamepad" | "desktop" | "touch"
 ```
+
+`PeanutUI.globalSignals` exposes the framework's global signals.
 
 ## Deferred updates {#deferred-updates}
 

@@ -7,7 +7,7 @@ title: SizeConstraint
 Clamps a widget's size between a minimum and maximum.
 
 ```luau
-modifiers = {
+PeanutUI.Frame {
     sizeConstraint = {
         min = Vector2.new(100, 100),
         max = Vector2.new(400, 400),

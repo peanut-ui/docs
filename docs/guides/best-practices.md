@@ -8,28 +8,19 @@ Patterns for writing PeanutUI code that stays correct and predictable as it grow
 
 ## One component per file {#one-per-file}
 
-Put each component in its own module and `return` the result of `Component.defineComponent`. The module boundary becomes the component boundary, so there's no hunting for where a component starts and ends.
+Put each component in its own module and `return` the result of `PeanutUI.defineComponent`. The module boundary becomes the component boundary, so there's no hunting for where a component starts and ends.
 
 ```luau
-const Component = PeanutUI.Component
-const Units = PeanutUI.Units
-const Widgets = PeanutUI.Widgets
+return PeanutUI.defineComponent(function(props)
+    const count = PeanutUI.Ref(0)
 
-const ref = PeanutUI.ref
-const computed = PeanutUI.computed
-
-return Component.defineComponent(function(props)
-    const count = ref(0)
-
-    return Widgets.Frame {
-        properties = { size = Units.Size(200, 200) },
+    return PeanutUI.Frame {
+        size = PeanutUI.Size(200, 200),
         children = {
-            Widgets.TextLabel {
-                properties = {
-                    text = computed(function()
-                        return `Count: {count.value}`
-                    end),
-                },
+            PeanutUI.TextLabel {
+                text = PeanutUI.Computed(function()
+                    return `Count: {count.value}`
+                end),
             },
         },
     }
@@ -46,28 +37,28 @@ const backgroundColors = {
     Color3.fromHex("#fecaca"),
 }
 
-const Spin = Animations.makeAnimation(function(obj, dt)
+const Spin = PeanutUI.Animations.makeAnimation(function(obj, dt)
     obj.Rotation += 120 * dt
 end, { "Rotation" })
 
-return Component.defineComponent(function(props)
-    return Widgets.Frame { ... }
+return PeanutUI.defineComponent(function(props)
+    return PeanutUI.Frame { ... }
 end)
 ```
 
 ## Derive with computed, don't mirror with watchers {#derive-with-computed}
 
-If a value is derived from another, use `Ref.computed`. A watcher that writes into a second ref is usually a computed in disguise, and it runs more work than it needs to.
+If a value is derived from another, use `PeanutUI.Computed`. A watcher that writes into a second ref is usually a computed in disguise, and it runs more work than it needs to.
 
 ```luau
 -- Avoid: a watcher mirroring a value into another ref
-const doubled = Ref.new(0)
+const doubled = PeanutUI.Ref(0)
 count.watch(function(v)
     doubled.value = v * 2
 end)
 
 -- Prefer: derive it
-const doubled = Ref.computed(function()
+const doubled = PeanutUI.Computed(function()
     return count.value * 2
 end)
 ```
@@ -79,20 +70,18 @@ Refs created inside a component are destroyed with it. Passing one outside the c
 ```luau
 -- Avoid: the ref escapes the component
 local leaked
-const Test = Component.defineComponent(function()
-    leaked = Ref.new(0)
-    return Widgets.Frame {}
+const Test = PeanutUI.defineComponent(function()
+    leaked = PeanutUI.Ref(0)
+    return PeanutUI.Frame {}
 end)
 
 -- Prefer: create shared refs outside, or keep them inside
-const shared = Ref.new(0)
-const Test = Component.defineComponent(function()
-    return Widgets.TextLabel {
-        properties = {
-            text = Ref.computed(function()
-                return shared.value
-            end),
-        },
+const shared = PeanutUI.Ref(0)
+const Test = PeanutUI.defineComponent(function()
+    return PeanutUI.TextLabel {
+        text = PeanutUI.Computed(function()
+            return shared.value
+        end),
     }
 end)
 ```
@@ -102,7 +91,7 @@ end)
 Deep reactive tables recalculate on nested changes. When you drive a list with `ReactiveFor`, wrap the table as shallow so only top-level changes trigger work.
 
 ```luau
-const items = Ref.reactive({ "a", "b" }, true)
+const items = PeanutUI.Reactive({ "a", "b" }, true)
 ```
 
 ## Don't assume updates are immediate {#updates-are-deferred}
@@ -112,10 +101,9 @@ Mutations flow through the [Scheduler](/reference/scheduler) stages — they don
 Public API got [shortcuts](/reference/api#scheduler) for that
 
 ```luau
-const settled = PeanutUI.settled
 count.value += 1
 
-settled(function()
+PeanutUI.settled(function()
     print("the label has been updated")
 end)
 ```

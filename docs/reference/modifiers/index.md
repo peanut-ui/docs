@@ -4,15 +4,13 @@ title: Modifiers
 
 # Modifiers
 
-Modifiers attach Roblox [UIComponent](https://create.roblox.com/docs/reference/engine/classes/UIComponent)s to a widget — rounded corners, padding, strokes, layouts, and constraints. They are passed in the `modifiers` table of a widget's props:
+Modifiers attach Roblox [UIComponent](https://create.roblox.com/docs/reference/engine/classes/UIComponent)s to a widget — rounded corners, padding, strokes, layouts, and constraints. They are written as keys directly on a widget's props table:
 
 ```luau
-Widgets.Frame {
-    properties = { size = Units.Size(200, 200) },
-    modifiers = {
-        cornerRadius = { all = Units.Unit(12) },
-        padding = { all = Units.Unit(16) },
-    }
+PeanutUI.Frame {
+    size = PeanutUI.Size(200, 200),
+    cornerRadius = { all = PeanutUI.Unit(12) },
+    padding = { all = PeanutUI.Unit(16) },
 }
 ```
 
@@ -26,10 +24,10 @@ Some modifiers accept either a single setup or a list:
 | `shadow` | `shadows` |
 
 ```luau
-modifiers = {
+PeanutUI.Frame {
     strokes = {
         { thickness = 2, color = Color3.new(1, 1, 1) },
-        { thickness = 2, color = Color3.new(0, 0, 0), borderOffset = Units.Unit(2) },
+        { thickness = 2, color = Color3.new(0, 0, 0), borderOffset = PeanutUI.Unit(2) },
     },
 }
 ```
@@ -39,9 +37,9 @@ modifiers = {
 Every modifier setup also accepts `transitions` and `animations`:
 
 ```luau
-modifiers = {
+PeanutUI.Frame {
     cornerRadius = {
-        all = Units.Unit(12),
+        all = PeanutUI.Unit(12),
         transitions = { all = Transitions.Ease(0.3, "EaseOut") },
     },
 }
@@ -102,7 +100,7 @@ modifiers = {
 
 ```luau
 const corner = widget.getModifier("cornerRadius")
-corner.setProperty("all", Units.Unit(16))
+corner.setProperty("all", PeanutUI.Unit(16))
 corner.observe("all", function(value)
     print("radius is now", value)
 end)

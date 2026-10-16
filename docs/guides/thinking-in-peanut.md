@@ -14,7 +14,7 @@ A few terms come up constantly. Here's what they mean in PeanutUI:
 
 - **Widget** — a live UI object. It owns a Roblox GUI object and exposes properties, children, events, modifiers, and animations.
 - **Ref** — a reactive value. Read it and you subscribe to it; change it and everything reading it updates. ([Values](/guides/reactive/values), [Computed](/guides/reactive/computed))
-- **Component** — a reusable piece of UI, made with `Component.defineComponent`.
+- **Component** — a reusable piece of UI, made with `defineComponent`.
 - **Space** — the root that puts your UI on screen.
 - **Scheduler** — applies reactive updates to Roblox instances.
 - **Bucket** — a scope that owns things and cleans them up.
@@ -26,16 +26,12 @@ Declaring a widget with props is exactly equivalent to creating it and calling `
 
 ```luau
 -- Declarative
-Widgets.Frame {
-    properties = {
-        size = Units.Size(200, 200),
-        backgroundColor = Color3.fromRGB(30, 30, 30),
-    },
+PeanutUI.Frame {
+    size = PeanutUI.Size(200, 200),
+    backgroundColor = Color3.fromRGB(30, 30, 30),
     children = {
-        Widgets.TextLabel {
-            properties = {
-                text = "Hello"
-            }
+        PeanutUI.TextLabel {
+            text = "Hello"
         }
     }
 }
@@ -43,11 +39,11 @@ Widgets.Frame {
 
 ```luau
 -- Imperative
-const frame = Widgets.Frame()
-frame.setProperty("size", Units.Size(200, 200))
+const frame = PeanutUI.Frame()
+frame.setProperty("size", PeanutUI.Size(200, 200))
 frame.setProperty("backgroundColor", Color3.fromRGB(30, 30, 30))
 
-const label = Widgets.TextLabel()
+const label = PeanutUI.TextLabel()
 label.setProperty("text", "Hello")
 
 frame.addChild(label)
@@ -60,14 +56,12 @@ The declarative form is just sugar over the imperative one. Use whichever reads 
 Values that change are [Refs](/guides/reactive/values). When a ref changes, anything reading it updates:
 
 ```luau
-const count = Ref.new(0)
+const count = PeanutUI.Ref(0)
 
-Widgets.TextLabel {
-    properties = {
-        text = Ref.computed(function()
-            return `Count: {count.value}`
-        end)
-    }
+PeanutUI.TextLabel {
+    text = PeanutUI.Computed(function()
+        return `Count: {count.value}`
+    end)
 }
 ```
 
@@ -91,9 +85,9 @@ If you're coming from raw Roblox, here's how the pieces line up:
 
 | Raw Roblox | PeanutUI |
 |---|---|
-| `Instance.new("Frame")` | `Widgets.Frame()` |
-| `frame.Size = ...` | `frame.setProperty("size", ...)` or `properties = { size = ... }` |
-| `frame.ChildAdded:Connect(...)` | `frame.listen("ChildAdded", ...)` or `events = { ChildAdded = ... }` |
+| `Instance.new("Frame")` | `PeanutUI.Frame()` |
+| `frame.Size = ...` | `frame.setProperty("size", ...)` or `size = ...` in props |
+| `frame.ChildAdded:Connect(...)` | `frame.listen("ChildAdded", ...)` or `ChildAdded = ...` in props |
 | `frame:Destroy()` | `frame.destroy()` |
 
 The difference is that a widget is a live object you can keep acting on, and its properties can be bound to [Refs](/guides/reactive/values) so they update themselves. Once you internalize "describe the tree, change refs, let the UI follow," the rest of the API follows.

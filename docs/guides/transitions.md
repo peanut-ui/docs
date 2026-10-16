@@ -15,8 +15,8 @@ const Transitions = PeanutUI.Transitions
 Transitions go in the `transitions` table of a widget's props:
 
 ```luau
-Widgets.Frame {
-    properties = { size = Units.Size(200, 200) },
+PeanutUI.Frame {
+    size = PeanutUI.Size(200, 200),
     transitions = {
         size = Transitions.Ease(0.5, "EaseOutBounce"),
         backgroundColor = Transitions.Ease(0.4, "EaseOut"),
@@ -67,9 +67,10 @@ Springs are good for natural-feeling motion that settles over time.
 Modifiers accept their own `transitions` table:
 
 ```luau
-modifiers = {
+PeanutUI.Frame {
+    size = PeanutUI.Size(200, 200),
     cornerRadius = {
-        all = Units.Unit(12),
+        all = PeanutUI.Unit(12),
         transitions = { all = Transitions.Ease(0.3, "EaseOut") },
     },
 }
@@ -80,7 +81,7 @@ modifiers = {
 To set a property without animating, use `snapProperty`:
 
 ```luau
-widget.snapProperty("size", Units.Size(300, 300))
+widget.snapProperty("size", PeanutUI.Size(300, 300))
 ```
 
 ## Transitions vs animations

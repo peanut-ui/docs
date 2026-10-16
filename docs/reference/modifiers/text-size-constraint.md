@@ -7,7 +7,7 @@ title: TextSizeConstraint
 Clamps a text widget's font size between a minimum and maximum.
 
 ```luau
-modifiers = {
+PeanutUI.TextLabel {
     textSizeConstraint = {
         min = 12,
         max = 32,
