@@ -70,6 +70,23 @@ count.watch(function(value)
 end)
 ```
 
+`PeanutUI.watch` is the standalone form and also accepts a [reactive table](/guides/reactive/values#reactive). See [Watch & WatchEffect](/guides/reactive/watch-effect) for the full API.
+
+## WatchEffect {#watch-effect}
+
+`watchEffect` runs a callback immediately and re-runs it whenever any ref read inside it changes. Dependencies are tracked automatically, so there is no explicit dependency list:
+
+```luau
+const stop = PeanutUI.watchEffect(function()
+    print("Count is " .. count.value)
+end)
+
+count.value = 1   -- prints "Count is 1"
+stop()
+```
+
+Use it for side effects — writing to instances, logging, imperative calls. See [Watch & WatchEffect](/guides/reactive/watch-effect) for the full API.
+
 ## Reactive tables {#reactive}
 
 `PeanutUI.Reactive` wraps a table in a deep reactive proxy:

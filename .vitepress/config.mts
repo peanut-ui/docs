@@ -47,6 +47,7 @@ export default defineConfig({
             items: [
               { text: "Values", link: "/guides/reactive/values" },
               { text: "Computed", link: "/guides/reactive/computed" },
+              { text: "Watch & WatchEffect", link: "/guides/reactive/watch-effect" },
               { text: "Conditionals & Loops", link: "/guides/reactive/control-flow" }
             ]
           },
@@ -123,6 +124,8 @@ export default defineConfig({
               { text: "Values", link: "/guides/reactive/values" },
               // Computed value
               { text: "Computed", link: "/guides/reactive/computed" },
+              // watch and watchEffect side effects
+              { text: "Watch & WatchEffect", link: "/guides/reactive/watch-effect" },
               // If, For, and ReactiveFor. And examples.
               { text: "Conditionals & Loops", link: "/guides/reactive/control-flow" }
             ]

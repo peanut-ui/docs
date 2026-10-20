@@ -57,6 +57,8 @@ Declarative widget constructors. See the [widget](/reference/widgets/) or [space
 | `isRef(obj)` | Whether a value is a ref. |
 | `isEqual(a, b)` | Creates a computed boolean comparing a ref to a value or ref. |
 | `unwrap(valueOrRef)` | Returns the value, reading `.value` if given a ref. |
+| `watch(ref, fn, params?)` | Watches a ref and calls `fn` on change. See [Watch & WatchEffect](/guides/reactive/watch-effect). |
+| `watchEffect(fn)` | Runs `fn` immediately and re-runs it when any ref read inside it changes. See [Watch & WatchEffect](/guides/reactive/watch-effect). |
 | `Size(...)` | Reactive size constructor. See [Units](/reference/units). |
 | `Position(...)` | Reactive position constructor. |
 | `Unit(...)` | Reactive unit constructor. |
