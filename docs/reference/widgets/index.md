@@ -87,6 +87,11 @@ All widgets share the base properties from `DefaultProperties`:
 | `backgroundColor` | `Color3` | Background color. |
 | `backgroundTransparency` | `number` | Background transparency. |
 | `name` | `string` | Instance name. |
+| `absoluteSize` | `string` | Absolute size of widget. Downscaled. |
+| `absolutePosition` | `string` | Absolute position of widget. Downscaled. |
+| `absoluteRotation` | `string` | Absolute rotation of widget. |
+| `screenSize` | `string` | Actual size of widget on screen. Useful for rendering. |
+| `screenPosition` | `string` | Actual position of widget on screen. Useful for rendering. |
 
 ## Shared events
 

@@ -72,6 +72,8 @@ All Space types share these properties:
 | `absoluteSize` | `Vector2` | Absolute size (read-only). |
 | `absolutePosition` | `Vector2` | Absolute position (read-only). |
 | `absoluteRotation` | `number` | Absolute rotation (read-only). |
+| `screenSize` | `string` | Actual size on screen (read-only). |
+| `screenPosition` | `string` | Actual position on screen (read-only). |
 
 ## ScreenSpace properties
 
