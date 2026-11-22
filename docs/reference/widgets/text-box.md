@@ -27,4 +27,10 @@ In addition to the [shared widget properties](/reference/widgets/#shared-propert
 
 ## Events
 
-TextBox uses the [shared widget events](/reference/widgets/#shared-events) with no additions.
+In addition to the [shared widget events](/reference/widgets/#shared-events):
+
+| Event | Signature |
+|---|---|
+| `Focused` | `() -> ()` |
+| `ReturnPressedFromOnScreenKeyboard` | `() -> ()` |
+| `FocusLost` | `(enterPressed: boolean, inputThatCausedFocusLoss: InputObject) -> ()` |
