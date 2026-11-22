@@ -8,7 +8,7 @@ Clamps a widget's size between a minimum and maximum.
 
 ```luau
 PeanutUI.Frame {
-    sizeConstraint = {
+    sizeConstraintModifier = {
         min = Vector2.new(100, 100),
         max = Vector2.new(400, 400),
     }
