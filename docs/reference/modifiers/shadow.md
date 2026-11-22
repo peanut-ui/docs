@@ -38,3 +38,6 @@ PeanutUI.Frame {
 | `spread` | `Size` | Shadow spread. |
 | `transparency` | `number` | Shadow transparency. |
 | `zIndex` | `number` | Draw order. |
+| `mode` | `Shape \| Text` | Shape of the shadow. |
+| `showBehindParent` | `boolean` | Render shadow behind the widget. |
+| `inset` | `boolean` | Wether the shadow is inset. |
